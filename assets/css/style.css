@@ -26,13 +26,25 @@ File: style.css
 /**  =====================
       Custom css start
 ==========================  **/
+
+.logo-bea{
+    max-width: 7%;
+    height:auto;
+    margin: 1px;
+}
+
+.table td, .table th {
+    padding: .65rem;
+}
+
 body {
-    background-image: url('/assets/images/kantor2.jpg');
-    background-color: #e9ecef;
+    /*background-image: url('../images/bg-1.jpg');*/
+    background-color: #e6f3fb;
     font-size: 0.875em;
     overflow-x: hidden;
     color: #353c4e;
-    font-family: "Open Sans", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-y: hidden !important;
 }
 
 ul {
@@ -257,8 +269,8 @@ p {
 }
 
 .card {
-    border-radius: 5px;
-    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0px;
+    box-shadow: 0px -11px 12px 0px #66666624;
     border: none;
     margin-bottom: 30px;
 }
@@ -711,9 +723,9 @@ a.mytooltip {
     right: 0%;
     left: 0%;
     bottom: 2%;
-    background-color: #4680ff7a;
+    background-color: #51a8e078;
     padding-top: 10px;
-    padding-bottom: 37px;
+    padding-bottom: 30px;
 }
 
 .danger-breadcrumb.carousel-subcaption {
@@ -1031,6 +1043,8 @@ a.bg-danger:hover {
     width: 100%;
     overflow-x: auto;
 }
+
+.table-responsive
 
 .table.table-xl td,
 .table.table-xl th {
