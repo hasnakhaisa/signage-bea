@@ -44,9 +44,18 @@ router.post('/addoutbox', function(req, res) {
 router.delete('/deleteinbox/:id', function(req, res) {
     var db = req.db;
     var collection = db.get('inbox');
-    var userToDelete = req.params.id;
+    var inboxToDelete = req.params.id;
     collection.remove({ '_id' : inboxToDelete }, function(err) {
         res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
+    });
+});
+/* EDIT to editinbox. */
+router.get('/editinbox/:id', function(req, res) {
+    var db = req.db;
+    var collection = db.get('inbox');
+    var inboxToEdit = req.params.id;
+    collection.findOne({ '_id' : inboxToEdit }, function(e,docs) {
+        res.json(docs);
     });
 });
 

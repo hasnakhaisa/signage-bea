@@ -13,6 +13,8 @@ $(document).ready(function () {
     // Delete Inbox link click
     $('#inboxList table tbody').on('click', 'td a.linkdeleteinbox', deleteInbox);
 
+    $('#inboxList table tbody').on('click', 'td a.linkeditinbox', editInbox);
+
 });
 
 // Functions =============================================================
@@ -23,21 +25,48 @@ function populateTable() {
     // Empty content string
     var tableContent = '';
 
-    // For each item in our JSON, add a table row and cells to the content string
-    $.each(data, function () {
-        tableContent += '<tr>';
-        tableContent += '<td>' + this.sender + '</td>';
-        tableContent += '<td>' + this.subjek + '</td>';
-        tableContent += '<td>' + this.posisi + '</td>';
-        tableContent += '<td>' + this.waktu + '</td>';
-        tableContent += '<td><a href="#" class="linkdeleteinbox" rel="' + this._id + '">delete</a></td>';
-        tableContent += '</tr>';
-    });
+    // jQuery AJAX call for JSON
+    $.getJSON('/users/getinbox', function (data) {
 
-    // Inject the whole content string into our existing HTML table
-    $('#inboxList table tbody').html(tableContent);
+        // Stick our user data array into a userlist variable in the global object
+        inboxData = data;
 
+
+        // For each item in our JSON, add a table row and cells to the content string
+        $.each(data, function () {
+            tableContent += '<tr>';
+            tableContent += '<td>' + this.sender + '</td>';
+            tableContent += '<td>' + this.subjek + '</td>';
+            tableContent += '<td>' + this.posisi + '</td>';
+            tableContent += '<td>' + this.waktu + '</td>';
+            tableContent += '<td><a href="#" class="linkeditinbox" rel="' + this._id + '">edit</a></td>';
+            tableContent += '<td><a href="#" class="linkdeleteinbox" rel="' + this._id + '">delete</a></td>';
+            tableContent += '</tr>';
+        });
+        console.log(tableContent);
+        // Inject the whole content string into our existing HTML table
+        $('#inboxList table tbody').html(tableContent);
+
+    })
 };
+
+function editInbox(event) {
+    event.preventDefault();
+
+    var content = "";
+
+    // jQuery AJAX call for JSON
+    $.getJSON('/users/editinbox/' + $(this).attr('rel'), function (data) {
+        // Stick our user data array into a userlist variable in the global object
+        console.log(data);
+        console.log(data.sender);
+        $('#senderField').attr('value',data.sender);
+        $('#subjekField').attr('value',data.subjek);
+        $('#posisiField').attr('value',data.posisi);
+        $('#waktuField').attr('value',data.waktu);
+    })
+
+}
 
 // Add Inbox
 function addInbox(event) {
@@ -45,12 +74,14 @@ function addInbox(event) {
 
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
-    $('#addInbox input').each(function(index, val) {
-        if($(this).val() === '') { errorCount++; }
+    $('#addInbox input').each(function (index, val) {
+        if ($(this).val() === '') {
+            errorCount++;
+        }
     });
 
     // Check and make sure errorCount's still at zero
-    if(errorCount === 0) {
+    if (errorCount === 0) {
 
         // If it is, compile all inbox info into one object
         var newInbox = {
@@ -66,13 +97,13 @@ function addInbox(event) {
             data: newInbox,
             url: '/users/addinbox',
             dataType: 'JSON'
-        }).done(function( response ) {
+        }).done(function (response) {
 
             // Check for successful (blank) response
             if (response.msg === '') {
 
                 // Clear the form inputs
-                $('#addInbox fieldset input').val('');
+                $('#addInbox form input').val('');
 
                 // Update the table
                 populateTable();
@@ -107,8 +138,8 @@ function deleteInbox(event) {
         // If they did, do our delete
         $.ajax({
             type: 'DELETE',
-            url: '/inboxs/deleteinbox/' + $(this).attr('rel')
-        }).done(function( response ) {
+            url: '/users/deleteinbox/' + $(this).attr('rel')
+        }).done(function (response) {
 
             // Check for a successful (blank) response
             if (response.msg === '') {

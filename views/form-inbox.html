@@ -32,7 +32,8 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
 
     <!-- date time picker -->
-    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet"
+          href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="javascripts/jquery/jquery.min.js"></script>
@@ -42,8 +43,10 @@
 
     <!-- date time picker -->
     <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+            src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
+    <script type="text/javascript" src="javascripts/global.js"></script>
 </head>
 
 <body>
@@ -138,7 +141,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-1">
                                             <div class="page-header-title">
-                                            <i class="icofont icofont-5-star-hotel bg-c-blue"></i>
+                                                <i class="icofont icofont-5-star-hotel bg-c-blue"></i>
                                             </div>
                                         </div>
                                         <div class="col-lg-11">
@@ -171,83 +174,98 @@
 
                                                 </div>
                                                 <div class="card-block">
-                                                    <h4 class="sub-title">Surat Keluar</h4>
-                                                    <table class="table" id="inboxList">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">Pengirim</th>
-                                                            <th scope="col">Subjek</th>
-                                                            <th scope="col">Posisi</th>
-                                                            <th scope="col">Tanggal/Waktu</th>
-                                                            <th scope="col">Delete?</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        </tbody>
-                                                    </table>
-                                                    <form>
-                                                        <div class="form-group row ">
-                                                            <label for="senderField" class="col-sm-2 col-form-label">Pengirim Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="senderField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="subjekField" class="col-sm-2 col-form-label">Subjek Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="subjekField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="posisiField" class="col-sm-2 col-form-label">Posisi Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="posisiField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="waktuField" class="col-sm-2 col-form-label">Posisi Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="waktuField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2 col-form-label">Tanggal & Waktu</label>
-                                                            <div class="col-sm-10">
-                                                                <div style="overflow:hidden;">
-                                                                    <div class="form-group">
-                                                                        <div class="row">
-                                                                            <div class="col-md-8">
-                                                                                <div id="datetimepicker12"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <script type="text/javascript">
-                                                                        $(function () {
-                                                                            $('#datetimepicker12').datetimepicker({
-                                                                                inline: true,
-                                                                                sideBySide: true
-                                                                            });
-                                                                        });
-                                                                    </script>
+                                                    <h4 class="sub-title">Surat Masuk</h4>
+                                                    <div id="inboxList">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">Pengirim</th>
+                                                                <th scope="col">Subjek</th>
+                                                                <th scope="col">Posisi</th>
+                                                                <th scope="col">Tanggal/Waktu</th>
+                                                                <th scope="col">Edit?</th>
+                                                                <th scope="col">Delete?</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div id="addInbox">
+                                                        <form>
+                                                            <div class="form-group row ">
+                                                                <label for="senderField"
+                                                                       class="col-sm-2 col-form-label">Pengirim
+                                                                    Surat</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"
+                                                                           id="senderField"
+                                                                           placeholder="Panjang maksimal 20 karakter"
+                                                                           maxlength="20">
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <button class="btn btn-success btn-block" id="buttonAddInbox" type="submit">
-                                                            <i class="icofont icofont-check-circled"></i>Simpan Perubahan
-                                                        </button>
-                                                    </form>
+                                                            <div class="form-group row">
+                                                                <label for="subjekField"
+                                                                       class="col-sm-2 col-form-label">Subjek
+                                                                    Surat</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"
+                                                                           id="subjekField"
+                                                                           placeholder="Panjang maksimal 20 karakter"
+                                                                           maxlength="20">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="posisiField"
+                                                                       class="col-sm-2 col-form-label">Posisi
+                                                                    Surat</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"
+                                                                           id="posisiField"
+                                                                           placeholder="Panjang maksimal 20 karakter"
+                                                                           maxlength="20">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="waktuField" class="col-sm-2 col-form-label">Posisi
+                                                                    Surat</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"
+                                                                           id="waktuField"
+                                                                           placeholder="Panjang maksimal 20 karakter"
+                                                                           maxlength="20">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Tanggal &
+                                                                    Waktu</label>
+                                                                <div class="col-sm-10">
+                                                                    <div style="overflow:hidden;">
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div id="datetimepicker12"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <script type="text/javascript">
+                                                                            $(function () {
+                                                                                $('#datetimepicker12').datetimepicker({
+                                                                                    inline: true,
+                                                                                    sideBySide: true
+                                                                                });
+                                                                            });
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-success btn-block"
+                                                                    id="btnAddInbox" type="submit">
+                                                                <i class="icofont icofont-check-circled"></i>Simpan
+                                                                Perubahan
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,6 +294,7 @@
 <script type="text/javascript" src="javascripts/classie/classie.js"></script>
 <!-- Custom js -->
 <script type="text/javascript" src="javascripts/script.js"></script>
+
 <script src="javascripts/pcoded.min.js"></script>
 <script src="javascripts/demo-12.js"></script>
 <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
