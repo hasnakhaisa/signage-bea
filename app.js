@@ -5,11 +5,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cons = require('consolidate');
 
+// Database
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/bea-cukai');
+
+
+var app = express();
+
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
 
 // view engine setup
 app.engine('html', cons.swig)

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Form Surat</title>
+    <title>Form Upload</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -171,46 +171,26 @@
 
                                                 </div>
                                                 <div class="card-block">
-                                                    <h4 class="sub-title">Surat Masuk/Keluar</h4>
-
+                                                    <h4 class="sub-title">Surat Keluar</h4>
+                                                    <table class="table" id="inboxList">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Pengirim</th>
+                                                            <th scope="col">Subjek</th>
+                                                            <th scope="col">Posisi</th>
+                                                            <th scope="col">Tanggal/Waktu</th>
+                                                            <th scope="col">Delete?</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
                                                     <form>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2 col-form-label">Jenis Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <select name="select" class="form-control">
-                                                                    <option value="opt1">
-                                                                        Surat Masuk
-                                                                    </option>
-                                                                    <option value="opt2">Surat Keluar</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <!--<fieldset class="form-group">-->
-                                                        <!--<div class="row">-->
-                                                                <!--<legend class="col-form-label col-sm-2 pt-0">Jenis Surat</legend>-->
-                                                                <!--<div class="col-sm-10">-->
-                                                                    <!--<div class="form-check pl-3">-->
-                                                                        <!--<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>-->
-                                                                        <!--&nbsp&nbsp<i class="icofont icofont-inbox">&nbsp</i>-->
-                                                                        <!--<label class="form-check-label pl-0" for="gridRadios1">-->
-                                                                              <!--Surat Masuk-->
-                                                                        <!--</label>-->
-                                                                    <!--</div>-->
-                                                                    <!--<div class="form-check pl-3">-->
-                                                                        <!--<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">-->
-                                                                        <!--&nbsp&nbsp<i class="icofont icofont-send-mail">&nbsp</i>-->
-                                                                        <!--<label class="form-check-label pl-0" for="gridRadios2">-->
-                                                                            <!--Surat Keluar-->
-                                                                        <!--</label>-->
-                                                                    <!--</div>-->
-                                                                <!--</div>-->
-                                                            <!--</div>-->
-                                                        <!--</fieldset>-->
                                                         <div class="form-group row ">
-                                                            <label for="pengirimField" class="col-sm-2 col-form-label">Pengirim Surat</label>
+                                                            <label for="senderField" class="col-sm-2 col-form-label">Pengirim Surat</label>
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control"
-                                                                       id="pengirimField"
+                                                                       id="senderField"
                                                                        placeholder="Panjang maksimal 20 karakter"
                                                                        maxlength="20">
                                                             </div>
@@ -229,6 +209,15 @@
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control"
                                                                        id="posisiField"
+                                                                       placeholder="Panjang maksimal 20 karakter"
+                                                                       maxlength="20">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="waktuField" class="col-sm-2 col-form-label">Posisi Surat</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control"
+                                                                       id="waktuField"
                                                                        placeholder="Panjang maksimal 20 karakter"
                                                                        maxlength="20">
                                                             </div>
@@ -255,8 +244,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <button class="btn btn-success btn-block" id="buttonAddInbox" type="submit">
+                                                            <i class="icofont icofont-check-circled"></i>Simpan Perubahan
+                                                        </button>
                                                     </form>
-                                                    <button class="btn btn-success btn-block" type="submit"><i class="icofont icofont-check-circled"></i>Simpan Perubahan</button>
                                                 </div>
                                             </div>
                                         </div>
