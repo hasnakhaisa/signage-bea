@@ -6,8 +6,8 @@
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
@@ -23,6 +23,11 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/css/bootstrap.min.css">
+
+    <!-- date time picker -->
+    <link rel="stylesheet" type="text/css" href="javascripts/gijgo/gijgo.min.css">
+    <link rel="stylesheet" type="text/css" href="javascripts/gijgo/css/gijgo.css">
+
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="images/icon/themify-icons/themify-icons.css">
     <!-- ico font -->
@@ -31,9 +36,6 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
 
-    <!-- date time picker -->
-    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-
     <!-- Required Jquery -->
     <script type="text/javascript" src="javascripts/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery-ui/jquery-ui.min.js"></script>
@@ -41,8 +43,8 @@
     <script type="text/javascript" src="javascripts/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- date time picker -->
-    <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <!--<script type="text/javascript" src="javascripts/gijgo/gijgo.min.js"></script>-->
+    <script type="text/javascript" src="javascripts/gijgo/js/gijgo.js"></script>
 
 </head>
 
@@ -240,16 +242,15 @@
                                                                     <div class="form-group">
                                                                         <div class="row">
                                                                             <div class="col-md-8">
-                                                                                <div id="datetimepicker12"></div>
+                                                                                <input id="input" width="234" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <script type="text/javascript">
-                                                                        $(function () {
-                                                                            $('#datetimepicker12').datetimepicker({
-                                                                                inline: true,
-                                                                                sideBySide: true
-                                                                            });
+                                                                        $('#input').datetimepicker({
+                                                                            uiLibrary: 'bootstrap4',
+                                                                            modal: true,
+                                                                            footer: true
                                                                         });
                                                                     </script>
                                                                 </div>
