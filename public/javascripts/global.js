@@ -63,7 +63,8 @@ function editInbox(event) {
         $('#senderField').attr('value',data.sender);
         $('#subjekField').attr('value',data.subjek);
         $('#posisiField').attr('value',data.posisi);
-        $('#waktuField').attr('value',data.waktu);
+        $('#waktuField').datetimepicker().value(data.waktu);
+        // $('#waktuField').attr('value',data.waktu);
     })
 
 }
@@ -88,7 +89,8 @@ function addInbox(event) {
             'sender': $('#addInbox form input#senderField').val(),
             'subjek': $('#addInbox form input#subjekField').val(),
             'posisi': $('#addInbox form input#posisiField').val(),
-            'waktu': $('#addInbox form input#waktuField').val()
+            // 'waktu': $('#addInbox form input#waktuField').val()
+            'waktu':$('#datetimepicker').datetimepicker().value()
         }
 
         // Use AJAX to post the object to our addinbox service

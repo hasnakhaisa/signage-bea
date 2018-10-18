@@ -26,6 +26,9 @@ File: style.css
 /**  =====================
       Custom css start
 ==========================  **/
+.gj-datepicker-bootstrap [role="right-icon"] button {
+    padding: 7px 8px 26px 28px;
+}
 
 .logo-bea{
     max-width: 7%;
