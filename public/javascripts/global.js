@@ -1,13 +1,15 @@
 // Inboxlist data array for filling in info box
 var inboxData = [];
 
+var dataID = "";
+var trig = 0;
+
 // DOM Ready =============================================================
 $(document).ready(function () {
 
     // Populate the inbox table on initial page load
     populateTable();
 
-    // Add Inbox button click
     $('#btnAddInbox').on('click', addInbox);
 
     // Delete Inbox link click
@@ -53,19 +55,80 @@ function populateTable() {
 function editInbox(event) {
     event.preventDefault();
 
-    var content = "";
+    dataID = $(this).attr('rel');
 
     // jQuery AJAX call for JSON
-    $.getJSON('/users/editinbox/' + $(this).attr('rel'), function (data) {
+    $.getJSON('/users/getaninbox/' + $(this).attr('rel'), function (data) {
         // Stick our user data array into a userlist variable in the global object
         console.log(data);
         console.log(data.sender);
-        $('#senderField').attr('value',data.sender);
-        $('#subjekField').attr('value',data.subjek);
-        $('#posisiField').attr('value',data.posisi);
+        $('#senderField').val(data.sender);
+        $('#subjekField').val(data.subjek);
+        $('#posisiField').val(data.posisi);
         $('#waktuField').datetimepicker().value(data.waktu);
-        // $('#waktuField').attr('value',data.waktu);
-    })
+    });
+
+    trig++;
+    console.log(trig);
+
+    $('#btnAddInbox').on('click', modifyInbox);
+}
+
+function modifyInbox(event) {
+    event.preventDefault();
+
+    // Super basic validation - increase errorCount variable if any fields are blank
+    var errorCount = 0;
+    $('#addInbox input').each(function (index, val) {
+        if ($(this).val() === '') {
+            errorCount++;
+        }
+    });
+
+    // Check and make sure errorCount's still at zero
+    if (errorCount === 0) {
+
+        // If it is, compile all inbox info into one object
+        var newInbox = {
+            'sender': $('#addInbox form input#senderField').val(),
+            'subjek': $('#addInbox form input#subjekField').val(),
+            'posisi': $('#addInbox form input#posisiField').val(),
+            'waktu': $('#waktuField').datetimepicker().value()
+        }
+
+        // Use AJAX to post the object to our addinbox service
+
+        console.log("editinbox global " + dataID);
+        console.log("editinbox global val" + JSON.stringify(newInbox));
+
+        $.ajax({
+            type: 'POST',
+            url: '/users/editinbox/' + dataID,
+            data: newInbox,
+            dataType: 'JSON'
+        }).done(function (response) {
+
+            // Check for successful (blank) response
+            if (response.msg === '') {
+
+                clearForm();
+                // Update the table
+                populateTable();
+
+            }
+            else {
+
+                // If something goes wrong, alert the error message that our service returned
+                alert('Error: ' + response.msg);
+
+            }
+        });
+    }
+    else {
+        // If errorCount is more than 0, error out
+        alert('Please fill in all fields');
+        return false;
+    }
 
 }
 
@@ -90,7 +153,7 @@ function addInbox(event) {
             'subjek': $('#addInbox form input#subjekField').val(),
             'posisi': $('#addInbox form input#posisiField').val(),
             // 'waktu': $('#addInbox form input#waktuField').val()
-            'waktu':$('#datetimepicker').datetimepicker().value()
+            'waktu': $('#waktuField').datetimepicker().value()
         }
 
         // Use AJAX to post the object to our addinbox service
@@ -103,19 +166,12 @@ function addInbox(event) {
 
             // Check for successful (blank) response
             if (response.msg === '') {
-
-                // Clear the form inputs
-                $('#addInbox form input').val('');
-
-                // Update the table
+                clearForm();
                 populateTable();
-
             }
             else {
-
                 // If something goes wrong, alert the error message that our service returned
                 alert('Error: ' + response.msg);
-
             }
         });
     }
@@ -164,3 +220,11 @@ function deleteInbox(event) {
     }
 
 };
+
+function clearForm() {
+    dataID = "";
+    // Clear the form inputs
+    $('#addInbox form input').val('');
+    if (dataID = "")
+        $('#btnAddInbox').on('click', addInbox);
+}
