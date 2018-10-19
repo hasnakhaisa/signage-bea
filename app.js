@@ -8,8 +8,8 @@ var cons = require('consolidate');
 
 // Database
 var monk = require('monk');
-var db = monk('localhost:27017/bea-cukai');
-
+// var db = monk('localhost:27017/bea-cukai');
+var db = monk('mongodb://beacukai:telukb4yur@ds137263.mlab.com:37263/heroku_ndqs94pw');
 var app = express();
 
 app.use(function(req,res,next){
