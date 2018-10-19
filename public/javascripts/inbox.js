@@ -6,16 +6,16 @@ var trig = 0;
 
 // DOM Ready =============================================================
 $(document).ready(function () {
-
     // Populate the inbox table on initial page load
+    $('#btnAddInbox').on('click', addInbox);
+    $('#btnSaveInbox').on('click', modifyInbox);
+
     populateTable();
 
-    $('#btnAddInbox').on('click', addInbox);
-
     // Delete Inbox link click
-    $('#inboxList table tbody').on('click', 'td a.linkdeleteinbox', deleteInbox);
+    $('#inboxList table tbody').on('click', 'td button.linkdeleteinbox', deleteInbox);
 
-    $('#inboxList table tbody').on('click', 'td a.linkeditinbox', editInbox);
+    $('#inboxList table tbody').on('click', 'td button.linkeditinbox', editInbox);
 
 });
 
@@ -28,11 +28,10 @@ function populateTable() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON('/users/getinbox', function (data) {
+    $.getJSON('/inbox/getinbox', function (data) {
 
         // Stick our user data array into a userlist variable in the global object
         inboxData = data;
-
 
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function () {
@@ -41,8 +40,8 @@ function populateTable() {
             tableContent += '<td>' + this.subjek + '</td>';
             tableContent += '<td>' + this.posisi + '</td>';
             tableContent += '<td>' + this.waktu + '</td>';
-            tableContent += '<td><a href="#" class="linkeditinbox" rel="' + this._id + '">edit</a></td>';
-            tableContent += '<td><a href="#" class="linkdeleteinbox" rel="' + this._id + '">delete</a></td>';
+            tableContent += '<td><button href="#addInbox" class="linkeditinbox btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
+            tableContent += '<td><button href="#inboxList" class="linkdeleteinbox btn btn-danger" rel="' + this._id + '"><i class="icofont icofont-trash"></button></td>';
             tableContent += '</tr>';
         });
         console.log(tableContent);
@@ -53,12 +52,17 @@ function populateTable() {
 };
 
 function editInbox(event) {
+    var jump = $(this).attr('href');
+    var new_position = $(jump).offset();
+
+    $('html, body').stop().animate({ scrollTop: new_position.top }, 500);
+
     event.preventDefault();
 
     dataID = $(this).attr('rel');
 
     // jQuery AJAX call for JSON
-    $.getJSON('/users/getaninbox/' + $(this).attr('rel'), function (data) {
+    $.getJSON('/inbox/getaninbox/' + $(this).attr('rel'), function (data) {
         // Stick our user data array into a userlist variable in the global object
         console.log(data);
         console.log(data.sender);
@@ -66,12 +70,9 @@ function editInbox(event) {
         $('#subjekField').val(data.subjek);
         $('#posisiField').val(data.posisi);
         $('#waktuField').datetimepicker().value(data.waktu);
+
+        $('#btnSaveInbox').prop('hidden',false);
     });
-
-    trig++;
-    console.log(trig);
-
-    $('#btnAddInbox').on('click', modifyInbox);
 }
 
 function modifyInbox(event) {
@@ -103,18 +104,16 @@ function modifyInbox(event) {
 
         $.ajax({
             type: 'POST',
-            url: '/users/editinbox/' + dataID,
+            url: '/inbox/editinbox/' + dataID,
             data: newInbox,
             dataType: 'JSON'
         }).done(function (response) {
 
             // Check for successful (blank) response
             if (response.msg === '') {
-
-                clearForm();
                 // Update the table
                 populateTable();
-
+                clearForm();
             }
             else {
 
@@ -160,14 +159,14 @@ function addInbox(event) {
         $.ajax({
             type: 'POST',
             data: newInbox,
-            url: '/users/addinbox',
+            url: '/inbox/addinbox',
             dataType: 'JSON'
         }).done(function (response) {
 
             // Check for successful (blank) response
             if (response.msg === '') {
-                clearForm();
                 populateTable();
+                clearForm();
             }
             else {
                 // If something goes wrong, alert the error message that our service returned
@@ -180,6 +179,7 @@ function addInbox(event) {
         alert('Please fill in all fields');
         return false;
     }
+
 };
 
 // Delete Inbox
@@ -196,7 +196,7 @@ function deleteInbox(event) {
         // If they did, do our delete
         $.ajax({
             type: 'DELETE',
-            url: '/users/deleteinbox/' + $(this).attr('rel')
+            url: '/inbox/deleteinbox/' + $(this).attr('rel')
         }).done(function (response) {
 
             // Check for a successful (blank) response
@@ -222,9 +222,7 @@ function deleteInbox(event) {
 };
 
 function clearForm() {
-    dataID = "";
+    $('#btnSaveInbox').prop('hidden',true);
     // Clear the form inputs
     $('#addInbox form input').val('');
-    if (dataID = "")
-        $('#btnAddInbox').on('click', addInbox);
 }

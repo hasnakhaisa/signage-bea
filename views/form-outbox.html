@@ -34,7 +34,7 @@
     <script type="text/javascript" src="javascripts/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
 
-    <script type="text/javascript" src="javascripts/inbox.js"></script>
+    <script type="text/javascript" src="javascripts/outbox.js"></script>
 
     <link rel="stylesheet" href="libs/gijgo/css/gijgo.css">
     <script src="libs/gijgo/js/gijgo.js"></script>
@@ -103,7 +103,7 @@
                             <li class="">
                                 <a href="form-surat.html">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Keluar/Masuk</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Keluar/keluar</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -140,8 +140,8 @@
                                         <div class="col-lg-11">
                                             <div class="page-header-title">
                                                 <div class="d-inline">
-                                                    <h4>Form Surat Masuk</h4>
-                                                    <span>Edit tampilan Singkat catatan surat masuk Setiap harinya</span>
+                                                    <h4>Form Surat keluar</h4>
+                                                    <span>Edit tampilan Singkat catatan surat keluar Setiap harinya</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,9 +164,9 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="card-block" id="addInbox">
+                                                <div class="card-block" id="addoutbox">
 
-                                                    <h4 class="sub-title">Form Surat Masuk</h4>
+                                                    <h4 class="sub-title">Form Surat keluar</h4>
 
                                                     <div >
                                                         <form>
@@ -188,8 +188,8 @@
                                                                 <div class="col-sm-10">
                                                                     <input type="text" class="form-control"
                                                                            id="subjekField"
-                                                                           placeholder="Panjang maksimal 35 karakter"
-                                                                           maxlength="35">
+                                                                           placeholder="Panjang maksimal 20 karakter"
+                                                                           maxlength="20">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -226,12 +226,12 @@
                                                                 </div>
                                                             </div>
                                                             <button class="btn btn-success btn-block"
-                                                                    id="btnSaveInbox" type="submit" hidden>
+                                                                    id="btnSaveoutbox" type="submit" hidden>
                                                                 <i class="icofont icofont-check-circled"></i>Simpan
                                                                 Perubahan
                                                             </button>
                                                             <button class="btn btn-primary btn-block"
-                                                                    id="btnAddInbox" type="submit">
+                                                                    id="btnAddoutbox" type="submit">
                                                                 <i class="icofont icofont-ui-add"></i>Tambah Data
                                                             </button>
                                                         </form>
@@ -239,9 +239,9 @@
                                                 </div>
                                                 <div class="card-block">
 
-                                                    <h4 class="sub-title">Tabel Surat Masuk</h4>
+                                                    <h4 class="sub-title">Tabel Surat keluar</h4>
 
-                                                    <div id="inboxList">
+                                                    <div id="outboxList">
                                                     <table class="table">
                                                         <thead>
                                                         <tr>
