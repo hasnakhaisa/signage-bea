@@ -29,9 +29,9 @@ function populateTable() {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function () {
             tableContent += '<tr>';
+            tableContent += '<td><button href="#addtext" class="linkedittext btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
             tableContent += '<td>' + this.kurs + '</td>';
             tableContent += '<td>' + this.running + '</td>';
-            tableContent += '<td><button href="#addtext" class="linkedittext btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
             tableContent += '</tr>';
         });
         // Inject the whole content string into our existing HTML table
@@ -65,7 +65,7 @@ function modifytext(event) {
 
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
-    $('#addtext input').each(function (index, val) {
+    $('#addtext textarea').each(function (index, val) {
         if ($(this).val() === '') {
             errorCount++;
         }
@@ -76,8 +76,8 @@ function modifytext(event) {
 
         // If it is, compile all text info into one object
         var newtext = {
-            'kurs': $('#addtext form input#kursField').val(),
-            'running': $('#addtext form input#runningField').val()
+            'kurs': $('#addtext form textarea#kursField').val(),
+            'running': $('#addtext form textarea#runningField').val()
         }
 
         $.ajax({
@@ -111,6 +111,6 @@ function modifytext(event) {
 
 function clearForm() {
     $('#btnSavetext').prop('hidden',true);
-    // Clear the form inputs
-    $('#addtext form input').val('');
+    // Clear the form textareas
+    $('#addtext form textarea').val('');
 }

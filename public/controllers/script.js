@@ -76,7 +76,6 @@ $(document).ready(function() {
         $("#morphsearch").removeClass('open');
     });
     // card js end
-    $.mCustomScrollbar.defaults.axis = "yx";
     $("#styleSelector .style-cont").mCustomScrollbar({
         setTop: "10px",
         setHeight: "calc(100% - 200px)",

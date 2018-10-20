@@ -103,8 +103,8 @@ function generateText() {
     var beritaText = '';
     $.getJSON('/text/gettext', function (data) {
         $.each(data, function () {
-            kursText += '<strong >' + this.kurs + '</strong>';
-            beritaText += '<strong >' + this.running + '</strong>';
+            kursText += '<span><strong >' + this.kurs + '</strong></span>';
+            beritaText += '<span><strong >' + this.running + '</strong></span>';
         });
         $('#kursText').html(kursText);
         $('#beritaText').html(beritaText);
