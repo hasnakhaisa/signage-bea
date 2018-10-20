@@ -35,6 +35,34 @@ let storage = multer.diskStorage({
 
 let upload = multer({storage: storage});
 
+router.post('/addinboxin', function (req, res) {
+    res.send(
+        {msg: "dsfds"}
+    );
+});
+
+
+// router.post('/uploadphoto', (req, res, next) => {
+    // var db = req.db;
+    // var collection = db.get('photos');
+    //
+    // let filePath = 'images/slider/dsfds' ;
+    //
+    // let photo = {
+    //     caption: req.body.caption,
+    //     photo_url: filePath
+    // };
+    //
+    // collection.insert(photo, function (err, result) {
+    //     res.send(
+    //         (err === null) ? {msg: ''} : {msg: err}
+    //     );
+    // });
+
+    // res.send(
+    //     (err === null) ? {msg: ''} : {msg: err}
+    // );
+// });
 router.post('/uploadphoto', upload.single('image'), (req, res, next) => {
     var db = req.db;
     var collection = db.get('photos');

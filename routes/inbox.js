@@ -11,7 +11,7 @@ router.get('/getinbox', function (req, res) {
 });
 
 /* POST to tambah surat masuk. */
-router.post('/addinbox', function (req, res) {
+router.post('/addinboxin', function (req, res) {
     var db = req.db;
     var collection = db.get('inbox');
     collection.insert(req.body, function (err, result) {

@@ -30,7 +30,9 @@ $(document).ready(function () {
 
 function prepareUpload(event) {
     image = event.target.files;
-    console.log(image);
+    console.log("isi image : " + image);
+    console.log("isi image : " + JSON.stringify(image));
+    console.log("isi image type : " + event.target.type);
 }
 
 // Fill table with data
@@ -142,8 +144,63 @@ function addPhoto(event) {
         // If it is, compile all photo info into one object
 
         var imageData = new FormData();
-        $.each(image, function(key, value)
-        {
+        var captionJos = $('#addphoto form input#captionField').val();
+        console.log("captionJos : " + captionJos);
+
+        imageData.append('caption', captionJos);
+        imageData.append('image', $('input[type=file]')[0].files[0]);
+
+        $.ajax({
+            type: 'POST',
+            data: imageData,
+            url: '/photos/uploadphoto',
+            contentType: false,
+            processData: false,
+            error: function (imageData, textStatus, jqXHR) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(jqXHR);
+            }
+        }).done(function (response) {
+
+            // Check for successful (blank) response
+            if (response.msg === '') {
+                clearForm();
+                populateTable();
+            }
+            else {
+                console.log("error " + response.msg);
+                // If something goes wrong, alert the error message that our service returned
+                alert('Error: ' + response.msg);
+            }
+        });
+    }
+    else {
+        // If errorCount is more than 0, error out
+        alert('Please fill in all fields');
+        return false;
+    }
+};
+
+function addPhoto2(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log("method addphoto called")
+    // Check and make sure errorCount's still at zero
+    console.log(image);
+    if ($('#captionField').val() !== '') {
+        // If it is, compile all photo info into one object
+
+        var imageData = new FormData();
+        $.each(image, function (key, value) {
             imageData.append(key, value);
         });
         imageData.append('caption', $('#addphoto form input#captionField').val());
@@ -154,8 +211,8 @@ function addPhoto(event) {
         };
 
         // Use AJAX to post the object to our addphoto service
-        console.log( newPhoto);
-        console.log( imageData);
+        console.log(newPhoto);
+        console.log(imageData);
         console.log(JSON.stringify(newPhoto));
         console.log(JSON.stringify(imageData));
 
