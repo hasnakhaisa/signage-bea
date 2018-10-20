@@ -1,22 +1,23 @@
 // Photolist data array for filling in info box
 var photoData = [];
 
-var dataID="";
+var dataID = "";
 
-var images;
+var image;
 
 // DOM Ready =============================================================
 $(document).ready(function () {
 
+    $('#btnAddphoto').on('click', addPhoto);
+    $('#btnSavephoto').on('click', modifyPhoto);
+
     // Populate the photo table on initial page load
     populateTable();
 
-    $('#btnAddPhoto').on('click', addPhoto);
-
     // Delete Photo link click
-    $('#photoList table tbody').on('click', 'td a.linkdeletephoto', deletePhoto);
+    $('#photoList table tbody').on('click', 'td button.linkdeletephoto', deletePhoto);
 
-    $('#photoList table tbody').on('click', 'td a.linkeditphoto', editPhoto);
+    $('#photoList table tbody').on('click', 'td button.linkeditphoto', editPhoto);
 
     // Variable to store your files
 
@@ -27,12 +28,10 @@ $(document).ready(function () {
 // Grab the files and set them to our variable
 });
 
-function prepareUpload(event)
-{
-    images = event.target.files;
+function prepareUpload(event) {
+    image = event.target.files;
+    console.log(image);
 }
-
-// Functions =============================================================
 
 // Fill table with data
 function populateTable() {
@@ -49,11 +48,10 @@ function populateTable() {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function () {
             tableContent += '<tr>';
-            tableContent += '<td>' + this.name + '</td>';
+            tableContent += '<td><img class="w-50" src="' + this.photo_url + '"></td>';
             tableContent += '<td>' + this.caption + '</td>';
-            tableContent += '<td>' + this.photo_url + '</td>';
-            tableContent += '<td><a href="#" class="linkeditphoto" rel="' + this._id + '">edit</a></td>';
-            tableContent += '<td><a href="#" class="linkdeletephoto" rel="' + this._id + '">delete</a></td>';
+            tableContent += '<td><button  class="linkeditphoto btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
+            tableContent += '<td><button class="linkdeletephoto btn btn-danger" rel="' + this._id + '"><i class="icofont icofont-trash"></button></td>';
             tableContent += '</tr>';
         });
         console.log(tableContent);
@@ -69,15 +67,13 @@ function editPhoto(event) {
     dataID = $(this).attr('rel');
 
     // jQuery AJAX call for JSON
-    $.getJSON('/photos/getanphoto/' + $(this).attr('rel'), function (data) {
+    $.getJSON('/photos/getaphoto/' + $(this).attr('rel'), function (data) {
         // Stick our user data array into a userlist variable in the global object
         console.log(data);
-        console.log(data.name);
-        $('#nameField').val(data.name);
         $('#captionField').val(data.caption);
-        $('#photo_urlField').val(data.photo_url);
+        // $('#photo_urlField').val(data.photo_url);
     });
-    $('#btnAddPhoto').on('click', modifyPhoto);
+    $('#btnSavephoto').prop('hidden', false);
 }
 
 function modifyPhoto(event) {
@@ -85,7 +81,7 @@ function modifyPhoto(event) {
 
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
-    $('#addPhoto input').each(function (index, val) {
+    $('#addphoto input').each(function (index, val) {
         if ($(this).val() === '') {
             errorCount++;
         }
@@ -96,9 +92,8 @@ function modifyPhoto(event) {
 
         // If it is, compile all photo info into one object
         var newPhoto = {
-            'name': $('#addPhoto form input#nameField').val(),
-            'caption': $('#addPhoto form input#captionField').val(),
-            'photo_url': $('#addPhoto form input#photo_urlField').val(),
+            'image': image,
+            'caption': $('#addphoto form input#captionField').val()
         }
 
         // Use AJAX to post the object to our addphoto service
@@ -115,7 +110,6 @@ function modifyPhoto(event) {
 
             // Check for successful (blank) response
             if (response.msg === '') {
-
                 clearForm();
                 // Update the table
                 populateTable();
@@ -140,32 +134,46 @@ function modifyPhoto(event) {
 // Add Photo
 function addPhoto(event) {
     event.preventDefault();
-
-    // Super basic validation - increase errorCount variable if any fields are blank
-    var errorCount = 0;
-    $('#addPhoto input').each(function (index, val) {
-        if ($(this).val() === '') {
-            errorCount++;
-        }
-    });
-
+    console.log("method addphoto called")
     // Check and make sure errorCount's still at zero
-    if (errorCount === 0) {
-
+    if ($('#captionField').val() !== '') {
         // If it is, compile all photo info into one object
         var newPhoto = {
-            'images' :images,
-            'name': $('#addPhoto form input#nameField').val(),
-            'caption': $('#addPhoto form input#captionField').val(),
-            'photo_url': $('#addPhoto form input#fileUpload').val(),
-        }
+            'image': image,
+            'caption': $('#addphoto form input#captionField').val(),
+            // 'photo_url': $('#addPhoto form input#fileUpload').val(),
+        };
 
         // Use AJAX to post the object to our addphoto service
+        console.log(newPhoto);
+
         $.ajax({
             type: 'POST',
-            data: newPhoto,
+            data: JSON.stringify(newPhoto) ,
             url: '/photos/uploadphoto',
-            dataType: 'JSON'
+            dataType: 'JSON',
+            // cache: false,
+            contentType: "application/json",
+            processData: false,
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(jqXHR);
+            }
         }).done(function (response) {
 
             // Check for successful (blank) response
@@ -174,6 +182,7 @@ function addPhoto(event) {
                 populateTable();
             }
             else {
+                console.log("error " + response.msg);
                 // If something goes wrong, alert the error message that our service returned
                 alert('Error: ' + response.msg);
             }
@@ -196,26 +205,34 @@ function deletePhoto(event) {
 
     // Check and make sure the photo confirmed
     if (confirmation === true) {
+        $.getJSON('/photos/getaphoto/' + $(this).attr('rel'), function (data) {
+            let filePath = data.photo_url;
 
-        // If they did, do our delete
-        $.ajax({
-            type: 'DELETE',
-            url: '/photos/deletephoto/' + $(this).attr('rel')
-        }).done(function (response) {
+            fs.unlink(filePath, (err) => {
+                if (err) throw err;
+                console.log('successfully deleted /tmp/hello');
 
-            // Check for a successful (blank) response
-            if (response.msg === '') {
-            }
-            else {
-                alert('Error: ' + response.msg);
-            }
+                // If they did, do our delete
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/photos/deletephoto/' + $(this).attr('rel')
+                }).done(function (response) {
 
-            // Update the table
-            populateTable();
+                    // Check for a successful (blank) response
+                    if (response.msg === '') {
+                    }
+                    else {
+                        alert('Error: ' + response.msg);
+                    }
 
+                    // Update the table
+                    populateTable();
+
+                });
+            });
         });
-
     }
+
     else {
 
         // If they said no to the confirm, do nothing
@@ -226,9 +243,7 @@ function deletePhoto(event) {
 };
 
 function clearForm() {
-    dataID = "";
+    $('#btnSavephoto').prop('hidden', true);
     // Clear the form inputs
-    $('#addPhoto form input').val('');
-    if (dataID = "")
-        $('#btnAddPhoto').on('click', addPhoto);
+    $('#addphoto form input').val('');
 }

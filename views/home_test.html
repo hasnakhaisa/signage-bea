@@ -38,8 +38,8 @@
     <script type="text/javascript" src="/javascripts/popper.js/popper.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap/js/bootstrap.min.js"></script>
 
-
     <script type="text/javascript" src="javascripts/home.js"></script>
+    <script src="/javascripts/moment/moment-with-locales.min.js"></script>
 
 
 </head>
@@ -92,7 +92,7 @@
 
                     <div class="col col-custom text-center" style="height: 18vh !important;">
                         <div class="pb-1">
-                            <span><b>https://www.bctelukbayur.com</b> | +021 909 8989</span>
+                            <span id="websiteField"><b>https://www.bctelukbayur.com</b></span><span id="telField"> | +021 909 8989</span>
 
                         </div>
                         <div class="row">
@@ -206,7 +206,7 @@
 
                     <div class="col col-custom text-center" style="height: 18vh !important;">
                         <div class="pb-1">
-                            <span><b>12:45 PM </b>| Kamis, 11 Oktober 2018</span>
+                            <span id="time"><b>12:45 PM </b>| Kamis, 11 Oktober 2018</span>
                         </div>
                         <div class="row">
 
@@ -249,8 +249,7 @@
                         </div>
                         <div class="col-md-11 text-center"
                              style="height: 5vh !important; margin-bottom: -10px !important;">
-                            <marquee behavior="scroll" direction="left" scrollamount="3">
-                                <strong>Running text untuk Kurs</strong>
+                            <marquee id="kursText" >
                             </marquee>
                         </div>
                     </div>
@@ -271,8 +270,7 @@
                         </div>
                         <div class="col-md-11 text-center"
                              style="height: 5vh !important; margin-bottom: -10px !important;">
-                            <marquee behavior="scroll" direction="left" scrollamount="4">
-                                <strong>Running text untuk Info Internal Kantor</strong>
+                            <marquee id="beritaText" scrollamount="4">
                             </marquee>
                         </div>
                     </div>

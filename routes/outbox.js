@@ -66,17 +66,4 @@ router.get('/getoutbox', function (req, res) {
 });
 
 
-
-/* POST to tambah surat keluar. */
-router.post('/addoutbox', function (req, res) {
-    var db = req.db;
-    var collection = db.get('outbox');
-    collection.insert(req.body, function (err, result) {
-        res.send(
-            (err === null) ? {msg: ''} : {msg: err}
-        );
-    });
-});
-
-
 module.exports = router;

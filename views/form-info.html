@@ -34,7 +34,7 @@
     <script type="text/javascript" src="javascripts/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
 
-    <script type="text/javascript" src="javascripts/outbox.js"></script>
+    <script type="text/javascript" src="javascripts/info.js"></script>
 
     <link rel="stylesheet" href="libs/gijgo/css/gijgo.css">
     <script src="libs/gijgo/js/gijgo.js"></script>
@@ -103,7 +103,7 @@
                             <li class="">
                                 <a href="form-surat.html">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Keluar/keluar</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Keluar/Masuk</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -140,8 +140,8 @@
                                         <div class="col-lg-11">
                                             <div class="page-header-title">
                                                 <div class="d-inline">
-                                                    <h4>Form Surat keluar</h4>
-                                                    <span>Edit tampilan Singkat catatan surat keluar Setiap harinya</span>
+                                                    <h4>Form Basic Info</h4>
+                                                    <span>Edit tampilan Singkat Basic Info </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,93 +164,50 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="card-block" id="addoutbox">
+                                                <div class="card-block" id="addinfo">
 
-                                                    <h4 class="sub-title">Form Surat keluar</h4>
+                                                    <h4 class="sub-title">Basic Info</h4>
 
                                                     <div >
                                                         <form>
                                                             <div class="form-group row ">
-                                                                <label for="senderField"
-                                                                       class="col-sm-2 col-form-label">Tujuan
-                                                                    Surat</label>
+                                                                <label for="websiteField"
+                                                                       class="col-sm-2 col-form-label">Website</label>
                                                                 <div class="col-sm-10">
                                                                     <input type="text" class="form-control"
-                                                                           id="senderField"
+                                                                           id="websiteField"
                                                                            placeholder="Panjang maksimal 20 karakter"
-                                                                           maxlength="20">
+                                                                    >
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label for="subjekField"
-                                                                       class="col-sm-2 col-form-label">Subjek
-                                                                    Surat</label>
+                                                                <label for="telField"
+                                                                       class="col-sm-2 col-form-label">Telepon</label>
                                                                 <div class="col-sm-10">
                                                                     <input type="text" class="form-control"
-                                                                           id="subjekField"
-                                                                           placeholder="Panjang maksimal 20 karakter"
-                                                                           maxlength="20">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="posisiField"
-                                                                       class="col-sm-2 col-form-label">Posisi
-                                                                    Surat</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                           id="posisiField"
-                                                                           placeholder="Panjang maksimal 20 karakter"
-                                                                           maxlength="20">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="waktuField" class="col-sm-2 col-form-label">Tanggal & Waktu</label>
-                                                                <div class="col-sm-10">
-                                                                    <div style="overflow:hidden;">
-                                                                        <div class="form-group">
-                                                                            <div class="row">
-                                                                                <div class="col-md-8">
-                                                                                    <input id="waktuField" width="234" />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <script type="text/javascript">
-                                                                            $('#waktuField').datetimepicker({
-                                                                                uiLibrary: 'bootstrap4',
-                                                                                modal: true,
-                                                                                footer: false,
-                                                                                format: 'HH:MM dd-mm-yyyy',
-                                                                            });
-                                                                        </script>
-                                                                    </div>
+                                                                           id="telField"
+                                                                           placeholder="Panjang maksimal 35 karakter"
+                                                                           >
                                                                 </div>
                                                             </div>
                                                             <button class="btn btn-success btn-block"
-                                                                    id="btnSaveoutbox" type="submit" hidden>
+                                                                    id="btnSaveinfo" type="submit" hidden>
                                                                 <i class="icofont icofont-check-circled"></i>Simpan
                                                                 Perubahan
-                                                            </button>
-                                                            <button class="btn btn-primary btn-block"
-                                                                    id="btnAddoutbox" type="submit">
-                                                                <i class="icofont icofont-ui-add"></i>Tambah Data
                                                             </button>
                                                         </form>
                                                     </div>
                                                 </div>
                                                 <div class="card-block">
 
-                                                    <h4 class="sub-title">Tabel Surat keluar</h4>
+                                                    <h4 class="sub-title">Tabel Basic Info</h4>
 
-                                                    <div id="outboxList">
-                                                    <table class="table">
+                                                    <div id="infoList">
+                                                    <table class="table table-responsive">
                                                         <thead>
                                                         <tr>
-                                                            <th scope="col">Tujuan</th>
-                                                            <th scope="col">Subjek</th>
-                                                            <th scope="col">Posisi</th>
-                                                            <th scope="col">Tanggal/Waktu</th>
-                                                            <th scope="col">Edit</th>
-                                                            <th scope="col">Delete</th>
+                                                            <th scope="col">Website</th>
+                                                            <th scope="col">Telepon</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>

@@ -2,7 +2,6 @@
 var inboxData = [];
 
 var dataID = "";
-var trig = 0;
 
 // DOM Ready =============================================================
 $(document).ready(function () {

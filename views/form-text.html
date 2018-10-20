@@ -2,13 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Form Surat</title>
+    <title>Form Upload</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
-    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
-    <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -23,28 +19,26 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/css/bootstrap.min.css">
-
-    <!-- date time picker -->
-    <link rel="stylesheet" type="text/css" href="libs/gijgo/gijgo.min.css">
-    <link rel="stylesheet" type="text/css" href="libs/gijgo/css/gijgo.css">
-
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="images/icon/themify-icons/themify-icons.css">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="images/icon/icofont/css/icofont.css">
+
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="javascripts/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="javascripts/popper.js/popper.min.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
 
-    <!-- date time picker -->
-    <!--<script type="text/javascript" src="libs/gijgo/gijgo.min.js"></script>-->
-    <script type="text/javascript" src="libs/gijgo/js/gijgo.js"></script>
+    <script type="text/javascript" src="javascripts/text.js"></script>
+
+    <link rel="stylesheet" href="libs/gijgo/css/gijgo.css">
+    <script src="libs/gijgo/js/gijgo.js"></script>
+
 
 </head>
 
@@ -140,14 +134,14 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-1">
                                             <div class="page-header-title">
-                                            <i class="icofont icofont-5-star-hotel bg-c-blue"></i>
+                                                <i class="icofont icofont-5-star-hotel bg-c-blue"></i>
                                             </div>
                                         </div>
                                         <div class="col-lg-11">
                                             <div class="page-header-title">
                                                 <div class="d-inline">
-                                                    <h4>Form Surat Masuk/Keluar</h4>
-                                                    <span>Edit tampilan Singkat catatan surat masuk/keluar Setiap harinya</span>
+                                                    <h4>Form running text</h4>
+                                                    <span>Edit tampilan Singkat catatan running text Setiap harinya</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,8 +156,6 @@
                                             <!-- Input Grid card start -->
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Form Surat Masuk/Keluar</h5>
-                                                    <span>Input text dengan panjang sesuai batas</span>
                                                     <div class="card-header-right"><i
                                                             class="icofont icofont-spinner-alt-5"></i></div>
 
@@ -172,73 +164,58 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="card-block">
-                                                    <h4 class="sub-title">Surat Masuk/Keluar</h4>
+                                                <div class="card-block" id="addtext">
 
-                                                    <form>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2 col-form-label">Jenis Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <select name="select" class="form-control">
-                                                                    <option value="opt1">
-                                                                        Surat Masuk
-                                                                    </option>
-                                                                    <option value="opt2">Surat Keluar</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row ">
-                                                            <label for="pengirimField" class="col-sm-2 col-form-label">Pengirim Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="pengirimField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="subjekField" class="col-sm-2 col-form-label">Subjek Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="subjekField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="posisiField" class="col-sm-2 col-form-label">Posisi Surat</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                       id="posisiField"
-                                                                       placeholder="Panjang maksimal 20 karakter"
-                                                                       maxlength="20">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2 col-form-label">Tanggal & Waktu</label>
-                                                            <div class="col-sm-10">
-                                                                <div style="overflow:hidden;">
-                                                                    <div class="form-group">
-                                                                        <div class="row">
-                                                                            <div class="col-md-8">
-                                                                                <input id="input" width="234" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <script type="text/javascript">
-                                                                            $('#input').datetimepicker({
-                                                                                uiLibrary: 'bootstrap4',
-                                                                                modal: false,
-                                                                                footer: false,
-                                                                                format: 'HH:MM dd-mm-yyyy',
-                                                                            });
-                                                                    </script>
+                                                    <h4 class="sub-title">Form running text</h4>
+
+                                                    <div >
+                                                        <form>
+                                                            <div class="form-group row ">
+                                                                <label for="kursField"
+                                                                       class="col-sm-2 col-form-label">Kurs</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"
+                                                                           id="kursField"
+                                                                           placeholder="Panjang maksimal 20 karakter"
+                                                                    >
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
-                                                    <button class="btn btn-success btn-block" type="submit"><i class="icofont icofont-check-circled"></i>Simpan Perubahan</button>
+                                                            <div class="form-group row">
+                                                                <label for="runningField"
+                                                                       class="col-sm-2 col-form-label">Berita</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"
+                                                                           id="runningField"
+                                                                           placeholder="Panjang maksimal 35 karakter"
+                                                                           >
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-success btn-block"
+                                                                    id="btnSavetext" type="submit" hidden>
+                                                                <i class="icofont icofont-check-circled"></i>Simpan
+                                                                Perubahan
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </div>
+                                                <div class="card-block">
+
+                                                    <h4 class="sub-title">Tabel Running Text</h4>
+
+                                                    <div id="textList">
+                                                    <table class="table table-responsive">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Kurs</th>
+                                                            <th scope="col">Berita</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -266,6 +243,7 @@
 <script type="text/javascript" src="javascripts/classie/classie.js"></script>
 <!-- Custom js -->
 <script type="text/javascript" src="javascripts/script.js"></script>
+
 <script src="javascripts/pcoded.min.js"></script>
 <script src="javascripts/demo-12.js"></script>
 <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>

@@ -20,6 +20,8 @@ app.use(function(req,res,next){
 var indexRouter = require('./routes/index');
 var inboxRouter = require('./routes/inbox');
 var outboxRouter = require('./routes/outbox');
+var textRouter = require('./routes/text');
+var infoRouter = require('./routes/info');
 var photosRouter = require('./routes/photos');
 let photo_url;
 
@@ -38,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/inbox', inboxRouter);
 app.use('/outbox', outboxRouter);
+app.use('/text', textRouter);
+app.use('/info', infoRouter);
 app.use('/photos', photosRouter);
 
 // catch 404 and forward to error handler
