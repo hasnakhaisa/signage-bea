@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+const auth = require('./auth');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -37,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(auth);
 app.use('/', indexRouter);
 app.use('/inbox', inboxRouter);
 app.use('/outbox', outboxRouter);
