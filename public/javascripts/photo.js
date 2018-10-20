@@ -100,14 +100,15 @@ function modifyPhoto(event) {
         console.log(trig);
         console.log(caption);
 
-        if(trig!=0) {
+        if(trig==0) {
             url = '/photos/editphoto/' + dataID;
         }
         else{
             url = '/photos/edituploadphoto/' + dataID;
             imageData.append('image', $('input[type=file]')[0].files[0]);
         }
-        console.log(imageData.values());
+        console.log(...imageData);
+        console.log(url);
 
         $.ajax({
             type: 'POST',
@@ -173,7 +174,7 @@ function addPhoto(event) {
         imageData.append('caption', caption);
         imageData.append('image', $('input[type=file]')[0].files[0]);
 
-        console.log(imageData);
+        console.log(...imageData);
 
         $.ajax({
             type: 'POST',
@@ -234,6 +235,8 @@ function modifyUploadPhoto(event) {
 
         imageData.append('caption', caption);
         imageData.append('image', $('input[type=file]')[0].files[0]);
+
+        console.log(...imageData);
 
         $.ajax({
             type: 'POST',
