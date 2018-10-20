@@ -73,3 +73,26 @@ typings/
 # next.js build output
 .next
 /package-lock.json
+/db/
+db/WiredTiger
+db/WiredTiger.lock
+db/WiredTiger.turtle
+db/WiredTiger.wt
+db/WiredTigerLAS.wt
+db/_mdb_catalog.wt
+db/collection-0--2073886415706234056.wt
+db/collection-0-2622831064880736090.wt
+db/collection-0-515228034001008402.wt
+db/collection-2-515228034001008402.wt
+db/collection-5-515228034001008402.wt
+db/diagnostic.data/
+db/index-1--2073886415706234056.wt
+db/index-1-2622831064880736090.wt
+db/index-1-515228034001008402.wt
+db/index-3-515228034001008402.wt
+db/index-4-515228034001008402.wt
+db/index-6-515228034001008402.wt
+db/journal/
+db/mongod.lock
+db/sizeStorer.wt
+db/storage.bson
