@@ -5,6 +5,8 @@ var dataID = "";
 
 var image;
 
+var trig=0;
+
 // DOM Ready =============================================================
 $(document).ready(function () {
 
@@ -33,6 +35,7 @@ function prepareUpload(event) {
     console.log("isi image : " + image);
     console.log("isi image : " + JSON.stringify(image));
     console.log("isi image type : " + event.target.type);
+    trig = 1;
 }
 
 // Fill table with data
@@ -72,42 +75,65 @@ function editPhoto(event) {
     $.getJSON('/photos/getaphoto/' + $(this).attr('rel'), function (data) {
         // Stick our user data array into a userlist variable in the global object
         console.log(data);
+
         $('#captionField').val(data.caption);
-        // $('#photo_urlField').val(data.photo_url);
+        // $('input[type=file]').val(data.photo_url);
     });
     $('#btnSavephoto').prop('hidden', false);
 }
 
 function modifyPhoto(event) {
+    event.stopPropagation();
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
-    var errorCount = 0;
-    $('#addphoto input').each(function (index, val) {
-        if ($(this).val() === '') {
-            errorCount++;
-        }
-    });
 
     // Check and make sure errorCount's still at zero
-    if (errorCount === 0) {
+    if ($('#captionField').val() !== '') {
 
-        // If it is, compile all photo info into one object
-        var newPhoto = {
-            'image': image,
-            'caption': $('#addphoto form input#captionField').val()
+        var imageData = new FormData();
+        var caption = $('#addphoto form input#captionField').val();
+        var url;
+
+        imageData.append('caption', caption);
+
+        console.log(trig);
+        console.log(caption);
+
+        if(trig!=0) {
+            url = '/photos/editphoto/' + dataID;
         }
-
-        // Use AJAX to post the object to our addphoto service
-
-        console.log("editphoto global " + dataID);
-        console.log("editphoto global val" + JSON.stringify(newPhoto));
+        else{
+            url = '/photos/edituploadphoto/' + dataID;
+            imageData.append('image', $('input[type=file]')[0].files[0]);
+        }
+        console.log(imageData.values());
 
         $.ajax({
             type: 'POST',
-            url: '/photos/editphoto/' + dataID,
-            data: newPhoto,
-            dataType: 'JSON'
+            url: url,
+            data: imageData,
+            contentType: false,
+            processData: false,
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(jqXHR);
+            }
         }).done(function (response) {
 
             // Check for successful (blank) response
@@ -137,92 +163,23 @@ function modifyPhoto(event) {
 function addPhoto(event) {
     event.stopPropagation();
     event.preventDefault();
-    console.log("method addphoto called")
-    // Check and make sure errorCount's still at zero
-    console.log(image);
+
     if ($('#captionField').val() !== '') {
         // If it is, compile all photo info into one object
 
         var imageData = new FormData();
-        var captionJos = $('#addphoto form input#captionField').val();
-        console.log("captionJos : " + captionJos);
+        var caption = $('#addphoto form input#captionField').val();
 
-        imageData.append('caption', captionJos);
+        imageData.append('caption', caption);
         imageData.append('image', $('input[type=file]')[0].files[0]);
+
+        console.log(imageData);
 
         $.ajax({
             type: 'POST',
             data: imageData,
             url: '/photos/uploadphoto',
             contentType: false,
-            processData: false,
-            error: function (imageData, textStatus, jqXHR) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                console.log(jqXHR);
-            }
-        }).done(function (response) {
-
-            // Check for successful (blank) response
-            if (response.msg === '') {
-                clearForm();
-                populateTable();
-            }
-            else {
-                console.log("error " + response.msg);
-                // If something goes wrong, alert the error message that our service returned
-                alert('Error: ' + response.msg);
-            }
-        });
-    }
-    else {
-        // If errorCount is more than 0, error out
-        alert('Please fill in all fields');
-        return false;
-    }
-};
-
-function addPhoto2(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    console.log("method addphoto called")
-    // Check and make sure errorCount's still at zero
-    console.log(image);
-    if ($('#captionField').val() !== '') {
-        // If it is, compile all photo info into one object
-
-        var imageData = new FormData();
-        $.each(image, function (key, value) {
-            imageData.append(key, value);
-        });
-        imageData.append('caption', $('#addphoto form input#captionField').val());
-
-        var newPhoto = {
-            'image': image,
-            'caption': $('#addphoto form input#captionField').val()
-        };
-
-        // Use AJAX to post the object to our addphoto service
-        console.log(newPhoto);
-        console.log(imageData);
-        console.log(JSON.stringify(newPhoto));
-        console.log(JSON.stringify(imageData));
-
-        $.ajax({
-            type: 'POST',
-            data: imageData,
-            url: '/photos/uploadphoto',
-            dataType: 'JSON',
-            // cache: false,
-            contentType: "application/json",
             processData: false,
             error: function (jqXHR, exception) {
                 var msg = '';
@@ -263,6 +220,70 @@ function addPhoto2(event) {
         return false;
     }
 };
+
+function modifyUploadPhoto(event) {
+    event.preventDefault();
+
+    // Super basic validation - increase errorCount variable if any fields are blank
+
+    // Check and make sure errorCount's still at zero
+    if ($('#captionField').val() !== '') {
+
+        var imageData = new FormData();
+        var caption = $('#addphoto form input#captionField').val();
+
+        imageData.append('caption', caption);
+        imageData.append('image', $('input[type=file]')[0].files[0]);
+
+        $.ajax({
+            type: 'POST',
+            url: '/photos/edituploadphoto/' + dataID,
+            data: imageData,
+            contentType: false,
+            processData: false,
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(jqXHR);
+            }
+        }).done(function (response) {
+
+            // Check for successful (blank) response
+            if (response.msg === '') {
+                clearForm();
+                // Update the table
+                populateTable();
+
+            }
+            else {
+
+                // If something goes wrong, alert the error message that our service returned
+                alert('Error: ' + response.msg);
+
+            }
+        });
+    }
+    else {
+        // If errorCount is more than 0, error out
+        alert('Please fill in all fields');
+        return false;
+    }
+
+}
 
 // Delete Photo
 function deletePhoto(event) {
@@ -315,4 +336,5 @@ function clearForm() {
     $('#btnSavephoto').prop('hidden', true);
     // Clear the form inputs
     $('#addphoto form input').val('');
+    trig = 0;
 }
