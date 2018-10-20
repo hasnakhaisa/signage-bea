@@ -32,4 +32,8 @@ router.get('/form-video', function(req, res, next) {
     res.render('form-video', { title: 'Express' });
 });
 
+router.get('/static', function(req, res, next) {
+    res.render('static', { title: 'Express' });
+});
+
 module.exports = router;

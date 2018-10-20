@@ -32,6 +32,15 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
 
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="/javascripts/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascripts/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="controllers/home.js"></script>
+    <script src="/javascripts/moment/moment-with-locales.min.js"></script>
+
 
 </head>
 
@@ -83,7 +92,7 @@
 
                     <div class="col col-custom text-center" style="height: 18vh !important;">
                         <div class="pb-1">
-                            <span><b>https://www.bctelukbayur.com</b> | +021 909 8989</span>
+                            <span id="websiteField"><b>https://www.bctelukbayur.com</b></span><span id="telField"> | +021 909 8989</span>
 
                         </div>
                         <div class="row">
@@ -92,7 +101,7 @@
 
                                 <div class="card-custom project-task">
                                     <div class="p-b-5">
-                                        <div class="table-responsive"
+                                        <div id="inboxList" class="table-responsive"
                                              style="overflow-x: hidden !important; overflow-Y: hidden !important; margin-bottom: -17px !important; height: 85.8vh !important;">
                                             <table class="table table-hover" style="zoom: 90%;">
                                                 <thead>
@@ -100,245 +109,9 @@
                                                     <th style="text-align: center !important; padding: 0.45rem !important;">
                                                         SURAT MASUK
                                                     </th>
-                                                    <!--<th>Time Spents</th>-->
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -364,64 +137,19 @@
                                         <div id="carousel-example-2" class="carousel slide carousel-fade"
                                              data-ride="carousel">
                                             <!--Indicators-->
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#carousel-example-2" data-slide-to="0"
-                                                    class="active"></li>
-                                                <li data-target="#carousel-example-2" data-slide-to="1"></li>
-                                                <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                                            <ol class="carousel-indicators" id="photoNav">
                                             </ol>
                                             <!--/.Indicators-->
                                             <!--Slides-->
-                                            <div class="carousel-inner" role="listbox">
-                                                <div class="carousel-item active">
-                                                    <div class="view">
-                                                        <img class="d-block w-100"
-                                                             style="height:42vh !important; width: 100% !important;"
-                                                             src="images/slider/1.JPG"
-                                                             alt="First slide">
-                                                        <div class="mask rgba-black-light"></div>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <p>Kantor Bea Cukai Teluk Bayur</p>
-                                                    </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <!--Mask color-->
-                                                    <div class="view">
-                                                        <img class="d-block w-100"
-                                                             style="height:42vh !important; width: 100% !important;"
-                                                             src="images/slider/2.JPG"
-                                                             alt="Second slide">
-                                                        <div class="mask rgba-black-strong"></div>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <p>Foto Berita 1</p>
-                                                    </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <!--Mask color-->
-                                                    <div class="view">
-                                                        <img class="d-block w-100"
-                                                             style="height:42vh !important; width: 100% !important;"
-                                                             src="images/slider/3.JPG"
-                                                             alt="Third slide">
-                                                        <div class="mask rgba-black-slight"></div>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <p>Bagian Dalam Kantor</p>
-                                                    </div>
-                                                </div>
+                                            <div class="carousel-inner" role="listbox" id="photoSlider">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-custom dribble-card pt-2"
                                      style="padding: 0rem !important; background: #183f5a;">
-                                    <div class="card-block text-center" style="padding: 0.25rem !important;">
-                                        <video id="player" controls autoplay onended="run()" class="d-block w-100"
-                                               style="width: 100% !important;">
-                                            <source src="videos/1.mp4" type="video/mp4">
-                                        </video>
+                                    <div id="player" class="card-block text-center" style="padding: 0.25rem !important;">
+                                        <video id="vidPlayer"></video>
                                     </div>
                                 </div>
                             </div>
@@ -433,14 +161,14 @@
 
                     <div class="col col-custom text-center" style="height: 18vh !important;">
                         <div class="pb-1">
-                            <span><b>12:45 PM </b>| Kamis, 11 Oktober 2018</span>
+                            <span id="time"><b>12:45 PM </b>| Kamis, 11 Oktober 2018</span>
                         </div>
                         <div class="row">
 
                             <div class="col-md-12" style="height: 87vh !important; ">
                                 <div class="card-custom project-task">
                                     <div class="p-b-5">
-                                        <div class="table-responsive"
+                                        <div id="outboxList"class="table-responsive"
                                              style="overflow-x: hidden !important; overflow-Y: hidden !important; margin-bottom: -17px !important; height: 85.8vh !important;">
                                             <table class="table table-hover" style="zoom: 90%;">
                                                 <thead>
@@ -452,253 +180,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #91c6e8;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-                                                                <div class="col-md-1"
-                                                                     style="background: #c0deef;border-radius: 4px;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background: #c0deef;">
-                                                        <div class="task-contain text-white">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"
-                                                                          class="m-l-10">Pengirim Surat</span>
-                                                                    <br>
-                                                                    <span style="float: left;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Subjek Surat</span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"
-                                                                          class="m-l-10">Posisi Surat: DKI Jakarta</span>
-                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"
-                                                                          class="m-l-10 m-t-5">Wed, 26 Sep 2018 04:43:24</span>
-                                                                </div>
-
-                                                                <div class="col-md-1"
-                                                                     style="background: #91c6e8;border-radius: 4px;"></div>
-
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -723,8 +204,7 @@
                         </div>
                         <div class="col-md-11 text-center"
                              style="height: 5vh !important; margin-bottom: -10px !important;">
-                            <marquee behavior="scroll" direction="left" scrollamount="3">
-                                <strong>Running text untuk Kurs</strong>
+                            <marquee id="kursText" >
                             </marquee>
                         </div>
                     </div>
@@ -745,8 +225,7 @@
                         </div>
                         <div class="col-md-11 text-center"
                              style="height: 5vh !important; margin-bottom: -10px !important;">
-                            <marquee behavior="scroll" direction="left" scrollamount="4">
-                                <strong>Running text untuk Info Internal Kantor</strong>
+                            <marquee id="beritaText" scrollamount="4">
                             </marquee>
                         </div>
                     </div>
@@ -756,19 +235,13 @@
         </div>
     </div>
 </div>
-<!-- Required Jquery -->
-<script type="text/javascript" src="/javascripts/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/javascripts/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/javascripts/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap/js/bootstrap.min.js"></script>
 <!-- jquery slimscroll js -->
 <script type="text/javascript" src="/javascripts/jquery-slimscroll/jquery.slimscroll.js"></script>
 <!-- modernizr js -->
 <script type="text/javascript" src="/javascripts/modernizr/modernizr.js"></script>
 <script type="text/javascript" src="/javascripts/modernizr/css-scrollbars.js"></script>
 <script type="text/javascript" src="/javascripts/common-pages.js"></script>
-<script type="text/javascript" src="/javascripts/script.js"></script>
-
+<script type="text/javascript" src="/controllers/script.js"></script>
 
 </body>
 

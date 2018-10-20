@@ -1,7 +1,6 @@
 let ObjectID = require('mongodb').ObjectID;
 let multer = require('multer');
 const fs = require('fs');
-const Jimp = require("jimp");
 var express = require('express');
 var router = express.Router();
 
