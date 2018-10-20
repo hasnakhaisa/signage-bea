@@ -133,23 +133,35 @@ function modifyPhoto(event) {
 
 // Add Photo
 function addPhoto(event) {
+    event.stopPropagation();
     event.preventDefault();
     console.log("method addphoto called")
     // Check and make sure errorCount's still at zero
+    console.log(image);
     if ($('#captionField').val() !== '') {
         // If it is, compile all photo info into one object
+
+        var imageData = new FormData();
+        $.each(image, function(key, value)
+        {
+            imageData.append(key, value);
+        });
+        imageData.append('caption', $('#addphoto form input#captionField').val());
+
         var newPhoto = {
             'image': image,
-            'caption': $('#addphoto form input#captionField').val(),
-            // 'photo_url': $('#addPhoto form input#fileUpload').val(),
+            'caption': $('#addphoto form input#captionField').val()
         };
 
         // Use AJAX to post the object to our addphoto service
-        console.log(newPhoto);
+        console.log( newPhoto);
+        console.log( imageData);
+        console.log(JSON.stringify(newPhoto));
+        console.log(JSON.stringify(imageData));
 
         $.ajax({
             type: 'POST',
-            data: JSON.stringify(newPhoto) ,
+            data: imageData,
             url: '/photos/uploadphoto',
             dataType: 'JSON',
             // cache: false,

@@ -44,9 +44,9 @@ router.post('/uploadphoto', upload.single('image'), (req, res, next) => {
     var collection = db.get('photos');
 
     console.log("req3"+JSON.stringify(req.body) );
-    console.log("req4"+JSON.stringify(req.file) );
+    console.log("req4"+JSON.stringify(req.image["0"].name) );
 
-    let filePath = 'images/slider/' + req.file.filename;
+    let filePath = 'images/slider/' + req.image["0"].name;
 
     let photo = {
         caption: req.body.caption,
