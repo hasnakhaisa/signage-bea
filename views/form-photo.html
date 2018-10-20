@@ -93,31 +93,54 @@
                         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Dashboard</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a href="home.html">
+                                <a href="/">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Lihat Tampilan</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Edit Form</div>
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Form Surat</div>
                             <li class="">
-                                <a href="form-surat.html">
+                                <a href="form-inbox">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Keluar/Masuk</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Masuk</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li class="">
-                                <a href="form-upload.html">
+                                <a href="form-outbox">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Upload Foto/photo</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Surat Keluar</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Form Upload</div>
+                            <li class="">
+                                <a href="form-photo">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Foto</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li class="">
-                                <a href="form-running-text.html">
+                                <a href="form-video">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Video</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Form Lainnya</div>
+                            <li class="">
+                                <a href="form-text">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Running Text Kurs/Berita</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="form-info">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Basic Info</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -167,15 +190,14 @@
                                                 <div class="card-block" id="addphoto">
 
                                                     <h4 class="sub-title">Form photo</h4>
-
                                                     <div>
                                                         <form enctype="multipart/form-data" id="formUpload">
                                                             <div class="form-group row">
-                                                                <label for="fileUpload" class="col-sm-2 col-form-label">
-                                                                    File input</label>
-                                                                <div class="col-sm-10">
+                                                                <label for="fileUpload" class="col-sm-2 col-form-label">File input</label>
+                                                                <div class="col">
                                                                     <input type="file" class="form-control-file" name="file"
                                                                            id="fileUpload">
+                                                                    <code >Compress foto sebelum upload, format harus .jpg</code>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -187,7 +209,7 @@
                                                                     <input type="text" class="form-control"
                                                                            id="captionField" name="captionField"
                                                                            placeholder="Panjang maksimal 20 karakter"
-                                                                           maxlength="20">
+                                                                           maxlength="50">
                                                                 </div>
                                                             </div>
                                                             <button class="btn btn-success btn-block"

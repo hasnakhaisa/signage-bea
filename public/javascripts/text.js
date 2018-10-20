@@ -34,7 +34,6 @@ function populateTable() {
             tableContent += '<td><button href="#addtext" class="linkedittext btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
             tableContent += '</tr>';
         });
-        console.log(tableContent);
         // Inject the whole content string into our existing HTML table
         $('#textList table tbody').html(tableContent);
 
@@ -80,11 +79,6 @@ function modifytext(event) {
             'kurs': $('#addtext form input#kursField').val(),
             'running': $('#addtext form input#runningField').val()
         }
-
-        // Use AJAX to post the object to our addtext service
-
-        console.log("edittext global " + dataID);
-        console.log("edittext global val" + JSON.stringify(newtext));
 
         $.ajax({
             type: 'POST',

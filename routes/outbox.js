@@ -35,8 +35,6 @@ router.post('/editoutbox/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('outbox');
     var outboxToEdit = req.params.id;
-    // console.log("editoutbox service "+outboxToEdit+"  "+req.body)
-
     collection.update({'_id': outboxToEdit}, req.body, function (err, result) {
         res.send(
             (err === null) ? {msg: ''} : {msg: err}

@@ -1,9 +1,9 @@
-// Photolist data array for filling in info box
-var photoData = [];
+// videolist data array for filling in info box
+var videoData = [];
 
 var dataID = "";
 
-var image;
+var video;
 
 var trig = 0;
 
@@ -12,16 +12,16 @@ var photoUrl;
 // DOM Ready =============================================================
 $(document).ready(function () {
 
-    $('#btnAddphoto').on('click', addPhoto);
-    $('#btnSavephoto').on('click', modifyPhoto);
+    $('#btnAddvideo').on('click', addvideo);
+    $('#btnSavevideo').on('click', modifyvideo);
 
-    // Populate the photo table on initial page load
+    // Populate the video table on initial page load
     populateTable();
 
-    // Delete Photo link click
-    $('#photoList table tbody').on('click', 'td button.linkdeletephoto', deletePhoto);
+    // Delete video link click
+    $('#videoList table tbody').on('click', 'td button.linkdeletevideo', deletevideo);
 
-    $('#photoList table tbody').on('click', 'td button.linkeditphoto', editPhoto);
+    $('#videoList table tbody').on('click', 'td button.linkeditvideo', editvideo);
 
     // Variable to store your files
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
 });
 
 function prepareUpload(event) {
-    image = event.target.files;
+    video = event.target.files;
     trig = 1;
 }
 
@@ -44,81 +44,70 @@ function populateTable() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON('/photos/getphotos', function (data) {
+    $.getJSON('/videos/getvideos', function (data) {
 
         // Stick our user data array into a userlist variable in the global object
-        photoData = data;
+        videoData = data;
 
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function () {
             tableContent += '<tr>';
-            tableContent += '<td><img class="w-50" src="' + this.photo_url + '"></td>';
-            tableContent += '<td>' + this.caption + '</td>';
-            tableContent += '<td><button href="#addphoto" class="linkeditphoto btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
-            tableContent += '<td><button class="linkdeletephoto btn btn-danger" rel="' + this._id + '"><i class="icofont icofont-trash"></button></td>';
+            tableContent += '<td><video id="player" controls class="d-block w-50"\n' +
+                '                                            <source src="' + this.video_url + '" type="video/mp4">\n' +
+                '                                        </video></td>';
+            tableContent += '<td><button href="#addvideo" class="linkeditvideo btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
+            tableContent += '<td><button class="linkdeletevideo btn btn-danger" rel="' + this._id + '"><i class="icofont icofont-trash"></button></td>';
             tableContent += '</tr>';
         });
         // Inject the whole content string into our existing HTML table
-        $('#photoList table tbody').html(tableContent);
+        $('#videoList table tbody').html(tableContent);
 
     })
 };
 
-function editPhoto(event) {
+function editvideo(event) {
     var jump = $(this).attr('href');
     var new_position = $(jump).offset();
 
-    $('html, body').stop().animate({scrollTop: new_position.top}, 500);
+    $('html, body').stop().animate({ scrollTop: new_position.top }, 500);
 
     event.preventDefault();
 
     dataID = $(this).attr('rel');
 
     // jQuery AJAX call for JSON
-    $.getJSON('/photos/getaphoto/' + $(this).attr('rel'), function (data) {
+    $.getJSON('/videos/getavideo/' + $(this).attr('rel'), function (data) {
         // Stick our user data array into a userlist variable in the global object
-
-        $('#captionField').val(data.caption);
-        // $('input[type=file]').val(data.photo_url);
-        photoUrl = data.photo_url;
+        videoUrl = data.video_url;
     });
-    $('#btnSavephoto').prop('hidden', false);
+    $('#btnSavevideo').prop('hidden', false);
 }
 
-function modifyPhoto(event) {
+function modifyvideo(event) {
     event.stopPropagation();
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
 
     // Check and make sure errorCount's still at zero
-    if ($('#captionField').val() !== '') {
+    if (trig != 0) {
 
         var url;
-        var imageData;
+        var videoData;
         var cType = "application/x-www-form-urlencoded; charset=UTF-8";
         var pData = true;
 
-        if (trig == 0) {
+        videoData = new FormData();
+        videoData.append('video', $('input[type=file]')[0].files[0]);
+        pData = false;
+        cType = false;
+        url = '/videos/edituploadvideo/' + dataID;
+        
 
-            imageData = {
-                'caption': $('#addphoto form input#captionField').val()
-            };
-            url = '/photos/editphoto/' + dataID;
-        }
-        else {
-            imageData = new FormData();
-            var caption = $('#addphoto form input#captionField').val();
-            imageData.append('caption', caption);
-            imageData.append('image', $('input[type=file]')[0].files[0]);
-            pData = false;
-            cType = false;
-            url = '/photos/edituploadphoto/' + dataID;
-        }
         $.ajax({
             type: 'POST',
             url: url,
-            data: imageData,
+            data: videoData,
             contentType: cType,
             processData: pData,
             dataType: 'JSON',
@@ -142,37 +131,37 @@ function modifyPhoto(event) {
                 console.log(jqXHR);
             }
         }).done(function (response) {
+
             // Check for successful (blank) response
             if (response.msg === '') {
-                if (url == "/photos/edituploadphoto/" + dataID) {
-                    $.ajax({
-                        type: 'POST',
-                        data:  {'url': photoUrl},
-                        dataType: 'JSON',
-                        url: '/photos/removephoto/',
-                        error: function (jqXHR, exception) {
-                            var msg = '';
-                            if (jqXHR.status === 0) {
-                                msg = 'Not connect.\n Verify Network.';
-                            } else if (jqXHR.status == 404) {
-                                msg = 'Requested page not found. [404]';
-                            } else if (jqXHR.status == 500) {
-                                msg = 'Internal Server Error [500].';
-                            } else if (exception === 'parsererror') {
-                                msg = 'Requested JSON parse failed.';
-                            } else if (exception === 'timeout') {
-                                msg = 'Time out error.';
-                            } else if (exception === 'abort') {
-                                msg = 'Ajax request aborted.';
-                            } else {
-                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                            }
-                            console.log(jqXHR);
+                $.ajax({
+                    type: 'POST',
+                    data:  {'url': videoUrl},
+                    dataType: 'JSON',
+                    url: '/videos/removevideo/',
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
                         }
-                    }).done(function (response) {
+                        console.log(jqXHR);
+                    }
+                }).done(function (response) {
 
-                    });
-                }
+                });
+
                 clearForm();
                 // Update the table
                 populateTable();
@@ -194,25 +183,22 @@ function modifyPhoto(event) {
 
 }
 
-// Add Photo
-function addPhoto(event) {
+// Add video
+function addvideo(event) {
     event.stopPropagation();
     event.preventDefault();
+    if (trig != 0) {
+        // If it is, compile all video info into one object
 
-    if ($('#captionField').val() !== '' && trig != 0) {
-        // If it is, compile all photo info into one object
+        var videoData = new FormData();
 
-        var imageData = new FormData();
-        var caption = $('#addphoto form input#captionField').val();
-
-        imageData.append('caption', caption);
-        imageData.append('image', $('input[type=file]')[0].files[0]);
+        videoData.append('video', $('input[type=file]')[0].files[0]);
 
 
         $.ajax({
             type: 'POST',
-            data: imageData,
-            url: '/photos/uploadphoto',
+            data: videoData,
+            url: '/videos/uploadvideo',
             contentType: false,
             processData: false,
             error: function (jqXHR, exception) {
@@ -232,7 +218,6 @@ function addPhoto(event) {
                 } else {
                     msg = 'Uncaught Error.\n' + jqXHR.responseText;
                 }
-                console.log(jqXHR);
             }
         }).done(function (response) {
 
@@ -255,20 +240,20 @@ function addPhoto(event) {
 };
 
 
-// Delete Photo
-function deletePhoto(event) {
+// Delete video
+function deletevideo(event) {
 
     event.preventDefault();
 
     // Pop up a confirmation dialog
-    var confirmation = confirm('Are you sure you want to delete this photo?');
+    var confirmation = confirm('Are you sure you want to delete this video?');
 
-    // Check and make sure the photo confirmed
+    // Check and make sure the video confirmed
     if (confirmation === true) {
-        $.getJSON('/photos/getaphoto/' + $(this).attr('rel'), function (data) {
+        $.getJSON('/videos/getavideo/' + $(this).attr('rel'), function (data) {
             $.ajax({
                 type: 'GET',
-                url: '/photos/deletephoto/' + data._id,
+                url: '/videos/deletevideo/' + data._id,
                 error: function (jqXHR, exception) {
                     var msg = '';
                     if (jqXHR.status === 0) {
@@ -286,7 +271,6 @@ function deletePhoto(event) {
                     } else {
                         msg = 'Uncaught Error.\n' + jqXHR.responseText;
                     }
-                    console.log(jqXHR);
                 }
             }).done(function (response) {
 
@@ -315,8 +299,8 @@ function deletePhoto(event) {
 };
 
 function clearForm() {
-    $('#btnSavephoto').prop('hidden', true);
+    $('#btnSavevideo').prop('hidden', true);
     // Clear the form inputs
-    $('#addphoto form input').val('');
+    $('#addvideo form input').val('');
     trig = 0;
 }

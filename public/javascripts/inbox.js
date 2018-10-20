@@ -43,7 +43,6 @@ function populateTable() {
             tableContent += '<td><button href="#inboxList" class="linkdeleteinbox btn btn-danger" rel="' + this._id + '"><i class="icofont icofont-trash"></button></td>';
             tableContent += '</tr>';
         });
-        console.log(tableContent);
         // Inject the whole content string into our existing HTML table
         $('#inboxList table tbody').html(tableContent);
 
@@ -62,9 +61,6 @@ function editInbox(event) {
 
     // jQuery AJAX call for JSON
     $.getJSON('/inbox/getaninbox/' + $(this).attr('rel'), function (data) {
-        // Stick our user data array into a userlist variable in the global object
-        console.log(data);
-        console.log(data.sender);
         $('#senderField').val(data.sender);
         $('#subjekField').val(data.subjek);
         $('#posisiField').val(data.posisi);
@@ -94,12 +90,7 @@ function modifyInbox(event) {
             'subjek': $('#addInbox form input#subjekField').val(),
             'posisi': $('#addInbox form input#posisiField').val(),
             'waktu': $('#waktuField').datetimepicker().value()
-        }
-
-        // Use AJAX to post the object to our addinbox service
-
-        console.log("editinbox global " + dataID);
-        console.log("editinbox global val" + JSON.stringify(newInbox));
+        };
 
         $.ajax({
             type: 'POST',

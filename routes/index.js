@@ -10,10 +10,6 @@ router.get('/test', function(req, res, next) {
   res.render('home_test', { title: 'Express' });
 });
 
-router.get('/nav', function(req, res, next) {
-    res.render('nav', { title: 'Express' });
-});
-
 router.get('/form-text', function(req, res, next) {
     res.render('form-text', { title: 'Express' });
 });

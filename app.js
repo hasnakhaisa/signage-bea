@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 var cons = require('consolidate');
 
+
 // Database
 var monk = require('monk');
 // var db = monk('localhost:27017/bea-cukai');
@@ -23,7 +24,7 @@ var outboxRouter = require('./routes/outbox');
 var textRouter = require('./routes/text');
 var infoRouter = require('./routes/info');
 var photosRouter = require('./routes/photos');
-let photo_url;
+var videosRouter = require('./routes/videos');
 
 // view engine setup
 app.engine('html', cons.swig)
@@ -43,6 +44,7 @@ app.use('/outbox', outboxRouter);
 app.use('/text', textRouter);
 app.use('/info', infoRouter);
 app.use('/photos', photosRouter);
+app.use('/videos', videosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

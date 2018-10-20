@@ -44,7 +44,6 @@ function populateTable() {
             tableContent += '<td><button href="#outboxList" class="linkdeleteoutbox btn btn-danger" rel="' + this._id + '"><i class="icofont icofont-trash"></button></td>';
             tableContent += '</tr>';
         });
-        console.log(tableContent);
         // Inject the whole content string into our existing HTML table
         $('#outboxList table tbody').html(tableContent);
 
@@ -63,9 +62,6 @@ function editoutbox(event) {
 
     // jQuery AJAX call for JSON
     $.getJSON('/outbox/getanoutbox/' + $(this).attr('rel'), function (data) {
-        // Stick our user data array into a userlist variable in the global object
-        console.log(data);
-        console.log(data.sender);
         $('#senderField').val(data.sender);
         $('#subjekField').val(data.subjek);
         $('#posisiField').val(data.posisi);
@@ -95,12 +91,7 @@ function modifyoutbox(event) {
             'subjek': $('#addoutbox form input#subjekField').val(),
             'posisi': $('#addoutbox form input#posisiField').val(),
             'waktu': $('#waktuField').datetimepicker().value()
-        }
-
-        // Use AJAX to post the object to our addoutbox service
-
-        console.log("editoutbox global " + dataID);
-        console.log("editoutbox global val" + JSON.stringify(newoutbox));
+        };
 
         $.ajax({
             type: 'POST',

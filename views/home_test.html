@@ -137,64 +137,19 @@
                                         <div id="carousel-example-2" class="carousel slide carousel-fade"
                                              data-ride="carousel">
                                             <!--Indicators-->
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#carousel-example-2" data-slide-to="0"
-                                                    class="active"></li>
-                                                <li data-target="#carousel-example-2" data-slide-to="1"></li>
-                                                <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                                            <ol class="carousel-indicators" id="photoNav">
                                             </ol>
                                             <!--/.Indicators-->
                                             <!--Slides-->
-                                            <div class="carousel-inner" role="listbox">
-                                                <div class="carousel-item active">
-                                                    <div class="view">
-                                                        <img class="d-block w-100"
-                                                             style="height:42vh !important; width: 100% !important;"
-                                                             src="images/slider/1.JPG"
-                                                             alt="First slide">
-                                                        <div class="mask rgba-black-light"></div>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <p>Kantor Bea Cukai Teluk Bayur</p>
-                                                    </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <!--Mask color-->
-                                                    <div class="view">
-                                                        <img class="d-block w-100"
-                                                             style="height:42vh !important; width: 100% !important;"
-                                                             src="images/slider/2.JPG"
-                                                             alt="Second slide">
-                                                        <div class="mask rgba-black-strong"></div>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <p>Foto Berita 1</p>
-                                                    </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <!--Mask color-->
-                                                    <div class="view">
-                                                        <img class="d-block w-100"
-                                                             style="height:42vh !important; width: 100% !important;"
-                                                             src="images/slider/3.JPG"
-                                                             alt="Third slide">
-                                                        <div class="mask rgba-black-slight"></div>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <p>Bagian Dalam Kantor</p>
-                                                    </div>
-                                                </div>
+                                            <div class="carousel-inner" role="listbox" id="photoSlider">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-custom dribble-card pt-2"
                                      style="padding: 0rem !important; background: #183f5a;">
-                                    <div class="card-block text-center" style="padding: 0.25rem !important;">
-                                        <video id="player" controls autoplay onended="run()" class="d-block w-100"
-                                               style="width: 100% !important;">
-                                            <source src="videos/1.mp4" type="video/mp4">
-                                        </video>
+                                    <div id="player" class="card-block text-center" style="padding: 0.25rem !important;">
+                                        <video id="vidPlayer"></video>
                                     </div>
                                 </div>
                             </div>

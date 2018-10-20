@@ -36,7 +36,6 @@ function populateTable() {
             tableContent += '<td><button href="#addinfo" class="linkeditinfo btn btn-warning" rel="' + this._id + '"><i class="icofont icofont-edit"></button></td>';
             tableContent += '</tr>';
         });
-        console.log(tableContent);
         // Inject the whole content string into our existing HTML table
         $('#infoList table tbody').html(tableContent);
 
@@ -81,12 +80,7 @@ function modifyinfo(event) {
         var newinfo = {
             'website': $('#addinfo form input#websiteField').val(),
             'telepon': $('#addinfo form input#telField').val()
-        }
-
-        // Use AJAX to post the object to our addinfo service
-
-        console.log("editinfo global " + dataID);
-        console.log("editinfo global val" + JSON.stringify(newinfo));
+        };
 
         $.ajax({
             type: 'POST',

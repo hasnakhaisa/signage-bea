@@ -6,17 +6,17 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/getphotos/', (req, res, next) => {
+router.get('/getvideos/', (req, res, next) => {
     var db = req.db;
-    var collection = db.get('photos');
+    var collection = db.get('videos');
     collection.find({}, {}, function (e, docs) {
         res.json(docs);
     });
 });
 
-router.get('/getaphoto/:id', (req, res) => {
+router.get('/getavideo/:id', (req, res) => {
     var db = req.db;
-    var collection = db.get('photos');
+    var collection = db.get('videos');
     const id = req.params.id;
     const details = {'_id': new ObjectID(id)};
     collection.findOne(details, function (e, docs) {
@@ -26,78 +26,60 @@ router.get('/getaphoto/:id', (req, res) => {
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/slider')
+        cb(null, 'public/videos')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + ".jpg")
+        cb(null, file.fieldname + '-' + Date.now() + ".mp4")
     }
 });
 
 let upload = multer({storage: storage});
 
-router.post('/uploadphoto', upload.single('image'), (req, res, next) => {
+router.post('/uploadvideo', upload.single('video'), (req, res, next) => {
     var db = req.db;
-    var collection = db.get('photos');
+    var collection = db.get('videos');
 
-    let filePath = 'images/slider/' + req.file.filename;
+    let filePath = 'videos/' + req.file.filename;
 
-    let photo = {
-        caption: req.body.caption,
-        photo_url: filePath
+    let video = {
+        video_url: filePath
     };
 
-    collection.insert(photo, function (err, result) {
+    collection.insert(video, function (err, result) {
         res.send(
             (err === null) ? {msg: ''} : {msg: err}
         );
     });
 });
 
-router.post('/editphoto/:id', (req, res) => {
+
+router.post('/edituploadvideo/:id', upload.single('video'), (req, res, next) => {
     var db = req.db;
-    var collection = db.get('photos');
+    var collection = db.get('videos');
     const id = req.params.id;
     const details = {'_id': id};
+    let filePath = 'videos/' + req.file.filename;
 
-    let photo = {
-        caption: req.body.caption,
+    let video = {
+        video_url: filePath
     };
-    collection.update(details, {$set: photo}, function (err, result) {
+    collection.update(details, video, function (err, result) {
         res.send(
             (err === null) ? {msg: ''} : {msg: err}
         );
     });
 });
 
-router.post('/edituploadphoto/:id', upload.single('image'), (req, res, next) => {
+router.get('/deletevideo/:id', (req, res) => {
     var db = req.db;
-    var collection = db.get('photos');
-    const id = req.params.id;
-    const details = {'_id': id};
-    let filePath = 'images/slider/' + req.file.filename;
-
-    let photo = {
-        caption: req.body.caption,
-        photo_url: filePath
-    };
-
-    collection.update(details, photo, function (err, result) {
-        res.send(
-            (err === null) ? {msg: ''} : {msg: err}
-        );
-    });
-});
-
-router.get('/deletephoto/:id', (req, res) => {
-    var db = req.db;
-    var collection = db.get('photos');
-    var filePath = '';
+    var collection = db.get('videos');
+    var filePath='';
 
     const id = req.params.id;
     const details = {'_id': id};
 
     collection.findOne(details, function (e, docs) {
-        filePath = "public/" + docs.photo_url;
+        filePath = "public/"+docs.video_url;
         fs.unlink(filePath, (err) => {
             if (err) throw err;
             collection.remove(details, function (err, result) {
@@ -109,7 +91,7 @@ router.get('/deletephoto/:id', (req, res) => {
     });
 });
 
-router.post('/removephoto/', (req, res) => {
+router.post('/removevideo/', (req, res) => {
     var filePath = "public/" + req.body.url;
     fs.unlink(filePath, (err) => {
         if (err) throw err;

@@ -82,8 +82,7 @@ $(document).ready(function() {
         setHeight: "calc(100% - 200px)",
     });
     $(".main-menu").mCustomScrollbar({
-        setTop: "10px",
-        setHeight: "calc(100% - 80px)",
+        setTop: "10px"
     });
 });
 $(document).ready(function() {
@@ -138,14 +137,4 @@ var nav = $('.fixed-button');
      }
  });
 
-let video_count =1;
-let videoPlayer = document.getElementById("player");
-
-function run(){
-    video_count++;
-    if (video_count == 6) video_count = 1;
-    var nextVideo = "assets/video/"+video_count+".mp4";
-    videoPlayer.src = nextVideo;
-    videoPlayer.play();
-};
 

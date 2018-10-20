@@ -1,13 +1,15 @@
 let inboxData = [];
 let outboxData = [];
-let textData = [];
-
+let videoList = [];
+let videoPlayer;
 $(document).ready(function () {
     populateInboxTable();
     populateOutboxTable();
     generateText();
     dateTime();
     basicInfo();
+    loadPhotos();
+    loadVideos();
 });
 
 function populateInboxTable() {
@@ -46,7 +48,6 @@ function populateInboxTable() {
                 '                                                    </td>\n' +
                 '                                                </tr>';
         });
-        console.log(tableContent);
         // Inject the whole content string into our existing HTML table
         $('#inboxList table tbody').html(tableContent);
 
@@ -101,27 +102,23 @@ function generateText() {
     var kursText = '';
     var beritaText = '';
     $.getJSON('/text/gettext', function (data) {
-        console.log(data);
         $.each(data, function () {
             kursText += '<strong >' + this.kurs + '</strong>';
             beritaText += '<strong >' + this.running + '</strong>';
         });
-
-        console.log(kursText);
         $('#kursText').html(kursText);
         $('#beritaText').html(beritaText);
     });
 }
+
 function basicInfo() {
     var websiteText = '';
     var teleponText = '';
     $.getJSON('/info/getinfo', function (data) {
-        console.log(data);
         $.each(data, function () {
             websiteText += '<b>' + this.website + '</b>';
-            teleponText += ' | '+this.telepon;
+            teleponText += ' | ' + this.telepon;
         });
-        console.log(websiteText);
         $('#websiteField').html(websiteText);
         $('#telField').html(teleponText);
     });
@@ -129,8 +126,76 @@ function basicInfo() {
 
 function dateTime() {
     var days = moment().locale('id').format('dddd, Do MMMM YYYY');
-    var timeText = '<b>'+moment().format('LT')+'</b> | '+days;
+    var timeText = '<b>' + moment().format('LT') + '</b> | ' + days;
 
-    console.log(timeText);
     $('#time').html(timeText);
 }
+
+function loadPhotos() {
+    var content = '';
+    var contentIndicator = '';
+
+    // jQuery AJAX call for JSON
+    $.getJSON('/photos/getphotos', function (data) {
+
+        // For each item in our JSON, add a table row and cells to the content string
+        var x = 0;
+        $.each(data, function () {
+            if (x == 0) {
+                content += '<div class="carousel-item active">\n';
+                contentIndicator += ' <li data-target="#carousel-example-2" data-slide-to="' + x + '" class="active"></li>';
+            }
+            else {
+                contentIndicator += ' <li data-target="#carousel-example-2" data-slide-to="' + x + '"></li>';
+                content += '<div class="carousel-item">\n';
+            }
+            content += '                                                    <div class="view">\n' +
+                '                                                        <img class="d-block w-100"\n' +
+                '                                                             style="height:42vh !important; width: 100% !important;"\n' +
+                '                                                             src="' + this.photo_url + '"\n' +
+                '                                                             alt="First slide">\n' +
+                '                                                        <div class="mask rgba-black-light"></div>\n' +
+                '                                                    </div>\n' +
+                '                                                    <div class="carousel-caption">\n' +
+                '                                                        <p>' + this.caption + '</p>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>'
+            x++;
+        });
+        // Inject the whole content string into our existing HTML table
+        $('#photoSlider').html(content);
+        $('#photoNav').html(contentIndicator);
+    })
+}
+
+function loadVideos() {
+    var content = '';
+
+    // jQuery AJAX call for JSON
+    $.getJSON('/videos/getvideos', function (data) {
+        x = 0;
+        $.each(data, function () {
+            if (x == 0) {
+                content += '<video id="vidPlayer" controls autoplay onended="run()" class=" d-block w-100"\n' +
+                    '                                               style="width: 100% !important; height: 39vh;">\n' +
+                    '<source src=' + this.video_url + ' type="video/mp4"></video>';
+            }
+            videoList.push(this.video_url);
+            x++;
+        });
+        // Inject the whole content string into our existing HTML table
+        $('#player').html(content);
+    });
+}
+a = 1;
+function run() {
+    videoPlayer = document.getElementById("vidPlayer");
+    var nextVideo = videoList[a];
+
+    videoPlayer.src = nextVideo;
+    videoPlayer.play();
+    if (a == videoList.length - 1)
+        a = 0;
+    else
+        a++;
+};
