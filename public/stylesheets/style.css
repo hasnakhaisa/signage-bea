@@ -46,7 +46,7 @@ File: style.css
 }
 
 body {
-    /*background-image: url('../images/bg-1.jpg');*/
+    /*background-image: url('/images/bg.jpg');*/
     background-color: #e6f3fb;
     font-size: 0.875em;
     overflow-x: hidden;

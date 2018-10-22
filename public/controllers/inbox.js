@@ -88,7 +88,7 @@ function modifyInbox(event) {
         var newInbox = {
             'sender': $('#addInbox form input#senderField').val(),
             'subjek': $('#addInbox form input#subjekField').val(),
-            'posisi': $('#addInbox form input#posisiField').val(),
+            'posisi': $('#addInbox form select#posisiField').val(),
             'waktu': $('#waktuField').datetimepicker().value()
         };
 
@@ -140,8 +140,7 @@ function addInbox(event) {
         var newInbox = {
             'sender': $('#addInbox form input#senderField').val(),
             'subjek': $('#addInbox form input#subjekField').val(),
-            'posisi': $('#addInbox form input#posisiField').val(),
-            // 'waktu': $('#addInbox form input#waktuField').val()
+            'posisi': $('#addInbox form select#posisiField').val(),
             'waktu': $('#waktuField').datetimepicker().value()
         }
 

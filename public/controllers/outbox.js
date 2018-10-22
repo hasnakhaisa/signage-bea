@@ -89,7 +89,7 @@ function modifyoutbox(event) {
         var newoutbox = {
             'sender': $('#addoutbox form input#senderField').val(),
             'subjek': $('#addoutbox form input#subjekField').val(),
-            'posisi': $('#addoutbox form input#posisiField').val(),
+            'posisi': $('#addoutbox form select#posisiField').val(),
             'waktu': $('#waktuField').datetimepicker().value()
         };
 
@@ -141,7 +141,7 @@ function addoutbox(event) {
         var newoutbox = {
             'sender': $('#addoutbox form input#senderField').val(),
             'subjek': $('#addoutbox form input#subjekField').val(),
-            'posisi': $('#addoutbox form input#posisiField').val(),
+            'posisi': $('#addoutbox form select#posisiField').val(),
             // 'waktu': $('#addoutbox form input#waktuField').val()
             'waktu': $('#waktuField').datetimepicker().value()
         }
