@@ -46,7 +46,8 @@ File: style.css
 }
 
 body {
-    /*background-image: url('/images/bg.jpg');*/
+    background-image: url('/images/bg-client.jpg');
+    background-size: cover;
     background-color: #e6f3fb;
     font-size: 0.875em;
     overflow-x: hidden;
