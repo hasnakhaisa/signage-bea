@@ -1,6 +1,6 @@
 const auth = require('basic-auth');
 
-const admins = { 'bea-cukai': { password: 'nangabadau' }, };
+const admins = { 'bea-cukai': { password: 'telukbayur' }, };
 
 module.exports = function (request, response, next) {
     var user = auth(request);
