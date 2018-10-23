@@ -46,7 +46,7 @@ File: style.css
 }
 
 body {
-    background-image: url('/images/bg-client.jpg');
+    background-image: url('/images/bg-client.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: #e6f3fb;
     font-size: 0.875em;
