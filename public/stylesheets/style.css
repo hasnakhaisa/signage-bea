@@ -45,6 +45,10 @@ File: style.css
     padding: .65rem;
 }
 
+.pb-1{
+    background: #dcf2ff;
+}
+
 body {
     background: url('/images/bg-client.jpg') no-repeat center center fixed;
     background-size: cover;
