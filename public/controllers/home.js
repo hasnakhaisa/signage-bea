@@ -1,13 +1,13 @@
-let inboxData = [];
-let outboxData = [];
-let videoList = [];
-let videoPlayer;
+var inboxData = [];
+var outboxData = [];
+var videoList = [];
+var videoPlayer;
 $(document).ready(function () {
-    populateInboxTable();
-    populateOutboxTable();
-    generateText();
-    dateTime();
-    basicInfo();
+    setInterval(populateInboxTable,1000);
+    setInterval(populateOutboxTable,1000);
+    setInterval(generateText,1000);
+    setInterval(dateTime,1000);
+    setInterval(basicInfo,1000);
     loadPhotos();
     loadVideos();
 });
@@ -30,21 +30,27 @@ function populateInboxTable() {
                 '                                                            <div class="row">\n' +
                 '                                                                <div class="col-md-1"\n' +
                 '                                                                     style="background: #c0deef;border-radius: 4px;"></div>\n' +
-                '                                                                <div class="col-md-6">\n' +
-                '                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"\n' +
+                '                                                             <div class="col-md-11 text-truncate d-block">\n' +
+                '                                                                    <div class="row">\n' +
+                '                                                                        <div class="col-md-9 text-truncate d-block">\n' +
+                '                                                                    <span style="float: left;font-weight: 600;font-size: 16px !important;color: #325167;"\n' +
                 '                                                                          class="m-l-10">' + this.sender + '</span>\n' +
-                '                                                                    <br>\n' +
-                '                                                                    <span style="float: left;color: #325167;"\n' +
-                '                                                                          class="m-l-10 m-t-5">' + this.subjek + '</span>\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col-md-5">\n' +
-                '                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"\n' +
-                '                                                                          class="m-l-10">Posisi Surat: ' + this.posisi + '</span>\n' +
+                '                                                                        </div>\n' +
+                '                                                                        <div class="col text-truncate">\n' +
                 '                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"\n' +
                 '                                                                          class="m-l-10 m-t-5">' + this.waktu + '</span>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                    <div class="row">\n' +
+                '                                                                    <span style="color: #325167;float: left;font-weight: 600;font-size: 14px !important;"\n' +
+                '                                                                          class="col-md-12 m-l-10 m-t-5 text-left">' + this.subjek + '</span>\n' +
+                '                                                                        <span style="float: left;color: #325167;"\n' +
+                '                                                                              class="col-md-12 m-l-10 text-left">\n' +
+                '                                                                        <i class="icofont icofont-location-pin"></i> ' + this.posisi + '</span>\n' +
+                '                                                                    </div>\n' +
+                '                                                                </div>' +
                 '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                        </div>\n' +
                 '                                                    </td>\n' +
                 '                                                </tr>';
         });
@@ -70,20 +76,25 @@ function populateOutboxTable() {
                 '                                                    <td style="background: #91c6e8;">\n' +
                 '                                                        <div class="task-contain text-white">\n' +
                 '                                                            <div class="row">\n' +
-                '\n' +
-                '                                                                <div class="col-md-6">\n' +
-                '                                                                    <span style="float: left;font-weight: 600;font-size: 14px !important;color: #034879;"\n' +
+                '                                                             <div class="col-md-11 text-truncate d-block">\n' +
+                '                                                                    <div class="row">\n' +
+                '                                                                        <div class="col-md-9 text-truncate d-block">\n' +
+                '                                                                    <span style="float: left;font-weight: 600;font-size: 16px !important;color: #325167;"\n' +
                 '                                                                          class="m-l-10">' + this.sender + '</span>\n' +
-                '                                                                    <br>\n' +
-                '                                                                    <span style="float: left;color: #325167;"\n' +
-                '                                                                          class="m-l-10 m-t-5">' + this.subjek + '</span>\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col-md-5">\n' +
-                '                                                                    <span style="color: #325167;float: right;font-weight: 600;font-size: 14px !important;"\n' +
-                '                                                                          class="m-l-10">Posisi Surat: ' + this.posisi + '</span>\n' +
+                '                                                                        </div>\n' +
+                '                                                                        <div class="col text-truncate">\n' +
                 '                                                                    <span style="font-size: 12px !important;float: right !important;color: #325167;"\n' +
                 '                                                                          class="m-l-10 m-t-5">' + this.waktu + '</span>\n' +
-                '                                                                </div>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                    <div class="row">\n' +
+                '                                                                    <span style="color: #325167;float: left;font-weight: 600;font-size: 14px !important;"\n' +
+                '                                                                          class="col-md-12 m-l-10 m-t-5 text-left">' + this.subjek + '</span>\n' +
+                '                                                                        <span style="float: left;color: #325167;"\n' +
+                '                                                                              class="col-md-12 m-l-10 text-left">\n' +
+                '                                                                        <i class="icofont icofont-location-pin"></i> ' + this.posisi + '</span>\n' +
+                '                                                                    </div>\n' +
+                '                                                                </div>' +
                 '                                                                <div class="col-md-1"\n' +
                 '                                                                     style="background: #c0deef;border-radius: 4px;"></div>\n' +
                 '                                                            </div>\n' +
@@ -187,7 +198,9 @@ function loadVideos() {
         $('#player').html(content);
     });
 }
+
 a = 1;
+
 function run() {
     videoPlayer = document.getElementById("vidPlayer");
     var nextVideo = videoList[a];
